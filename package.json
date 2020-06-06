@@ -1,0 +1,10 @@
+{
+  "scripts": {
+    "test": "lint-md ./README.md ./docs",
+    "docs:dev": "vuepress dev docs --open --host 127.0.0.1",
+    "docs:build": "vuepress build docs"
+  },
+  "devDependencies": {
+    "lint-md-cli": "^0.1.2"
+  }
+}
