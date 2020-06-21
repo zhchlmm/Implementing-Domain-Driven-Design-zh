@@ -10,14 +10,16 @@ The Context Map of a project can be expressed in two ways. The easier way is to 
 
 At a high level, keep in mind that this chapter focuses on the solution space assessment, whereas the previous chapter dealt quite a bit with the problem space assessment.
 
+::: tip
 Road Map to This Chapter
 
 - Learn why drawing a Context Map is essential for the success of your project.
 - See how easy it can be to draw a meaningful Context Map.
 - Consider the common organizational and system relationships and how they affect your projects.
 - Learn from the SaaSOvation teams as they produce Maps to get control of their projects.
+  :::
 
-## WHY CONTEXT MAPS ARE SO ESSENTIAL
+## 3.1 WHY CONTEXT MAPS ARE SO ESSENTIAL 上下文映射图为什么重要
 
 When you start out on a DDD effort, first draw a visual Context Map of your current project situation. Produce a Context Map of the current Bounded Contexts involved in your project and the integration relationships between them. Figure 3.1 shows an abstract Context Map. We’ll be filling in the details as we progress.
 
@@ -25,27 +27,33 @@ When you start out on a DDD effort, first draw a visual Context Map of your curr
 
 This simple drawing is your team’s Map. Other project teams can refer to it, but they should also create their own Maps if they are implementing DDD. Your Map is drawn primarily to give your team the solution space perspective it needs to succeed. Other teams may not be using DDD and/or they may not care about your perspective.
 
+::: tip
 Oh, No! There’s New Terminology!
 
 We are introducing Big Ball of Mud, Customer-Supplier, and Conformist here. Be patient; these and other DDD team and integration relationships noted here are discussed in detail later in this chapter.
+:::
 
 For example, when you are integrating Bounded Contexts in a large enterprise, you may need to interface with a Big Ball of Mud. The team maintaining the muddy monolith may not care what direction your project takes as long as you adhere to their API. So, they aren’t going to gain any insight from your Map or what you do with their API. Still, your Map needs to reflect the kind of relationship you have with them, because it will give your team needed insight and indicate areas where inter-team communication is imperative. Having that understanding can do much to help your team succeed.
 
+::: tip
 Communications Facility
 
 Besides giving you an inventory of systems you must interact with, a Context Map serves as a catalyst for inter-team communication.
+:::
 
 Imagine what would happen if your team assumes that the team maintaining the muddy monolith will provide new APIs that you are depending on, but they don’t intend to provide them, or they don’t even know what you are thinking. Your team is counting on a Customer-Supplier relationship with the mud. The legacy team, however, by providing only what they currently have, forces your team into an unexpected Conformist relationship. Depending on how late in the project you got the bad news, this unseen yet actual relationship could delay your delivery or even cause your project’s failure. By drawing a Context Map early, you will be forced to think carefully about your relationships with all other projects you depend on.
 
 Identify each model in play on the project and define its BOUNDED CONTEXT. . . . Name each BOUNDED CONTEXT, and make the names part of the UBIQUITOUS LANGUAGE. Describe the points of contact between the models, outlining explicit translation for any communication and highlighting any sharing. [Evans, p. 345]
 
+::: tip
 ![](./figures/ch3/team_meeting-1.jpg)
 
 When the CollabOvation team first started developing its greenfield model, they should have used a Context Map. Even though they were nearly starting from scratch, stating their assumptions about the project in the form of a Map would have prompted them to think about separate Bounded Contexts. They still could have listed significant modeling elements on a whiteboard, and then gathered them into groups of related linguistic terms. That would have forced recognition of linguistic boundaries and resulted in a simple Context Map. However, they actually didn’t understand strategic modeling in the least. They first needed to attain a strategic modeling breakthrough. Later on they did make the crucial discovery of this project-saving tool, applying it to their eventual benefit. When the subsequent Core Domain project got under way, it again paid off substantially.
+:::
 
 Let’s see how you can quickly produce a useful Context Map.
 
-## Drawing Context Maps
+### 3.1.1 Drawing Context Maps 绘制上下文映射图
 
 A Context Map captures the existing terrain. First, you should map the present, not the imagined future. If the landscape will change as your current project progresses, you can update the Map at that time. First focus on the current situation so you can form an understanding of where you are and determine where to go next.
 
@@ -63,9 +71,11 @@ Sometimes we’ll want to zoom in and add more detail to a given part of a Conte
 
 All of the drawings and any prose can be placed into a single reference document if it has value to the team. With any such effort we should avoid ceremony and remain both simple and agile. The more ceremony you add, the fewer people will want to use the Map. Putting too much detail in diagrams won’t really help the team. Open communication is the key. As conversations unveil strategic insight, add it to the Context Map.
 
+::: tip
 No, It’s Not Enterprisy
 
 A Context Map is not an Enterprise Architecture or system topology diagram.
+:::
 
 A Context Map is not an Enterprise Architecture or system topology diagram. The information is conveyed relative to interacting models and DDD organizational patterns. Still, Context Maps may be used in high-level architectural investigations, providing views of the enterprise not otherwise available. They may highlight architectural deficiencies such as integration bottlenecks. Because they exhibit an organizational dynamic, Context Maps may even help us identify sticky governance issues that could block progress, and other team and management challenges that are more difficult to uncover using other methods.
 
@@ -77,7 +87,7 @@ AJ: “The missus said, ‘I was out in the pasture with the cows; didn’t you 
 
 The diagrams deserve to be posted prominently on a wall in a team area. If the team frequents a wiki, the diagrams might also be uploaded there. If a wiki will be largely ignored, don’t bother. It’s been said that a wiki can be a place where information goes to die. No matter where they are displayed, Context Maps will be hidden in plain sight unless the team pays regular attention to them through meaningful discussion.
 
-## Projects and Organizational Relationships
+### 3.1.2 Projects and Organizational Relationships 产品和组织映射关系
 
 To briefly reiterate, SaaSOvation is on a path to develop and refine three products:
 
@@ -85,9 +95,11 @@ To briefly reiterate, SaaSOvation is on a path to develop and refine three produ
 2. A reusable identity and access management model, IdOvation provides secure role-based access management for registered users. These features were first combined with CollabOvation (point 1), but that implementation was limited and not reusable. SaaSOvation has refactored CollabOvation, introducing a new, clean Bounded Context. A key product feature is the support of multiple tenants, which is vital to an SaaS application. IdOvation serves as a Generic Subdomain to its consuming models.
 3. An agile project management product, ProjectOvation, is at this point in time the new Core Domain. Users of this SaaS product can create project management assets, as well as analysis and design artifacts, and track progress using a Scrum-based execution framework. As with CollabOvation, ProjectOvation uses IdOvation as a Generic Subdomain. One of the innovative features adds team collaboration (point 1) to agile project management, enabling discussions around Scrum products, releases, sprints, and individual backlog items.
 
+::: tip
 Finally, the Definitions!
 
 The organizational and integration patterns mentioned previously are defined . . .
+:::
 
 What are the relationships between these Bounded Contexts and their individual project teams? There are several DDD organizational and integration patterns, one of which commonly exists between any two Bounded Contexts. Each of the following definitions is largely quoted from [Evans, Ref]:
 
@@ -115,10 +127,11 @@ The Context Map drawings that follow use these abbreviations to indicate the pat
 
 As you review the following sample Context Maps and supporting text, it may be helpful to glance back at Chapter 2, “Domains, Subdomains, and Bounded Contexts.” The diagrams of each of the three sample Bounded Contexts are also useful here. Since they remain fairly high-level, those diagrams could be included as part of the Maps for each Context, although they are not repeated here.
 
-## Mapping the Three Contexts
+### 3.1.3 Mapping the Three Contexts 映射 3 个示例限界上下文
 
 Now let’s jump into the team experience so we can learn from what they did . . .
 
+::: tip
 ![](./figures/ch3/team_huddle-c3.jpg)
 
 When the CollabOvation team realized the tangle they had created, they dug into [Evans] to help find their way out of it. Among other discoveries of enormous value within the strategic design patterns, they found a practical tool named Context Maps. They also found a helpful article online by [Brandolini] expanding on this technique. Since the tool’s guidance indicated that they should map the existing terrain, that’s the first step they took. Figure 3.2 shows the results.
@@ -126,32 +139,42 @@ When the CollabOvation team realized the tangle they had created, they dug into 
 <Figures figure="3-2">The tangle within the Collaboration Context caused by unwelcome concepts is exposed by this Map. The caution sign points out the area of impurity.</Figures>
 
 The first Map produced by the team highlights their early recognition of the existence of a Bounded Context that they named Collaboration Context. By the odd shape of the existing boundary they appropriately conveyed the likely existence of a second Context, but one without a clean and clear separation from the Core Domain.
+:::
 
 A narrow passage near the top allows foreign concepts to migrate back and forth almost without censure, as the caution sign indicates. It’s not that Context boundaries need to be completely impenetrable. As with any boundary, the team wants the Collaboration Context to control with full knowledge what crosses its borders and for what purpose. Otherwise the territory becomes overrun with unknown and possibly unwelcome visitors. In the case of a model, the unwelcome visitors generally cause confusion and bugs. Modelers should be cordial and even welcoming, but under conditions that favor order and harmony. Any foreign concepts entering the boundaries need to demonstrate the right to be there, even taking on characteristics compatible with the territory within.
 
+::: tip
 ![](./figures/ch3/team_meeting-2.jpg)
 
 This analysis led to a better understanding not only of the current condition of the model, but in what direction the project needed to go. Once the project team realized that concepts such as security, users, and permissions did not belong inside the Collaboration Context, they responded accordingly. The team had to segregate these from the Core Domain and allow them to enter only under agreeable terms.
+:::
 
 This is a vital DDD project commitment. The Language of each Bounded Context must be honored in order for all models to remain pure. Linguistic segregation and a strict adherence to it help each team involved in the project to focus on their own Bounded Context and keep their vision correctly focused on their own work.
 
+::: tip
 Applying Subdomain analysis, or problem space assessment, led the team to the diagram shown in Figure 3.3. Two Subdomains were carved out of a single Bounded Context. Since it is a good goal to align Subdomains one-to-one with Bounded Contexts, this analysis showed the need to separate the single Bounded Context into two.
 
 <Figures figure="3-3">The team’s Subdomain analysis led to the discovery of two, a Collaboration Core Domain and a Security Generic Subdomain.</Figures>
+:::
 
+::: tip
 The Subdomain and boundary analysis led to decisions. When human users of CollabOvation interact with the available features, they do so as Participants, Authors, Moderators, and so forth. A variety of other contextual separations are discussed later, but this gives a good idea of the necessary divisions that were created. With that knowledge, the clean and crisp boundaries indicated on the high-level Context Map shown in Figure 3.4 came about. The team used Segregated Core [Evans] to refactor to reach this point of clarity. The recognizable shapes of the boundaries act as icons or visual cues for each Context. Keeping the same relative shapes across diagrams can help with cognition.
 
 <Figures figure="3-4">The original Core Domain is marked with a bold boundary and integration points. Here IdOvation serves as a Generic Subdomain for the downstream CollabOvation.</Figures>
+:::
 
 The Context Maps usually don’t appear all at once as the various sketches may lead you to believe, although when finally understood, they are not difficult to produce. Thought and discussion help to refine a Map through rapid iterations. Some of the refinements might come in the way of integration points, which describe the relationships between Contexts.
 
+::: tip
 The first two Maps indicate the gains made after applying strategic design. After the original CollabOvation project was well under way, the team had factored out identity and access concerns. As they progressed, they produced the Context Map in Figure 3.4. The team sketched only the Core Domain, Collaboration Context, along with the new Generic Subdomain, Identity and Access Context. They didn’t depict any future models, such as the Agile Project Management Context. It wouldn’t help the team to jump ahead too far. They only needed to correct flaws with what existed. Transformations supporting forthcoming systems would be needed soon enough, and that Map belonged to the future team to produce.
+:::
 
 Whiteboard Time
 
 - Thinking of your own Bounded Context, can you identify concepts that don’t belong? If so, draw a new Context Map that shows the desired Contexts and relationships between them.
 - Which of the nine DDD organizational and integration relationships would you choose, and why?
 
+::: tip
 ![](./figures/ch3/team_meeting-1.jpg)
 
 When the next project involving ProjectOvation was starting up, it was time to augment the existing Map with the new Core Domain, the Agile Project Management Context. The results of that mapping are seen in Figure 3.5. It was not premature to capture what was in planning, even though it was not yet in code. The details inside the new Context weren’t fully understood, but that would come with discussion. Applying high-level strategic design at this early stage would help all teams understand where their responsibilities lay. Since the third of the three high-level Maps is just an augmentation of the previous, we’ll be focusing on it. That’s where SaaSOvation is headed. The company has assigned experienced lead developers to the new project. Being the richest of the three Contexts and the current direction, the new Core Domain is where the best developers should be working.
@@ -159,6 +182,7 @@ When the next project involving ProjectOvation was starting up, it was time to a
 <Figures figure="3-5">The current Core Domain is marked with a bold boundary and integration points. The CollabOvation Supporting Subdomain and IdOvation Generic Subdomain are upstream.</Figures>
 
 Some essential segregations are already well understood. Similar to the Collaboration Context, when users of ProjectOvation create products, plan releases, schedule sprints, and work on the tasks of backlog items, they do so as Product Owners and Team Members. The Identity and Access Context is segregated out of the Core Domain. The same goes for their use of the Collaboration Context. It is now a Supporting Subdomain. Any consumption by the new model will be protected by boundaries and translations into Core Domain concepts.
+:::
 
 Consider the finer details of these diagrams. They are not system architecture diagrams. If they were, given that Agile Project Management Context is our new Core Domain, we would expect it to reside at the top or center of the diagram. Here, however, it is at the bottom. This possibly curious characteristic indicates visually that the core model is downstream of the others.
 
@@ -190,9 +214,11 @@ Collaboration Context
 
 Now, back to the experience of the Collaboration team . . .
 
+::: tip
 ![](./figures/ch3/team_huddle-c2.jpg)
 
 The Collaboration Context was the first model and system—the first Core Domain—and its workings are now well understood. The integrations employed here are easier yet less robust in terms of reliability and autonomy. Creating a zoomed Context Map is done with relative ease.
+:::
 
 As a client of the REST-based services published by the Identity and Access Context, the Collaboration Context takes a traditional RPC-like approach to reaching resources. This Context doesn’t permanently record any data from the Identity and Access Context that it can subsequently reference for local reuse. Rather, it reaches out to the remote system to request information every single time it needs it. This Context is obviously highly dependent on remote services, not autonomous. This is a fact that SaaSOvation is willing to live with for now. Integration with a Generic Subdomain was completely unexpected. To meet their demanding delivery schedule the team couldn’t invest time in a more elaborate autonomous design. At the time the up-front ease-of-design perk could not be passed up. After the rollout of ProjectOvation and the experience with autonomy gained there, similar techniques may be employed for CollabOvation.
 
@@ -221,9 +247,11 @@ To achieve a greater degree of autonomy than RPC affords, the Agile Project Mana
 
 A greater degree of autonomy can be achieved when dependent state is already in place in our local system. Some may think of this as a cache of whole dependent objects, but that’s not usually the case when using DDD. Instead we create local domain objects translated from the foreign model, maintaining only the minimal amount of state needed by the local model. To get the state in the first place we may need to make limited, well-placed RPC calls, or similar requests for REST-based resources. But any necessary synchronization with remote model changes can often best be achieved through message-oriented notifications published by remote systems. The notifications might be sent on a service bus or a message queue, or be published via REST.
 
+::: tip
 Think Minimalistic
 
 The synchronized state is the limited, minimal attributes of the remote models that are needed by the local model. It’s not only to limit our need to synchronize data, it’s also a matter of modeling concepts properly.
+:::
 
 It pays to limit our use of remote state, even when considering the design of the local modeling elements themselves. We don’t want, for example, a ProductOwner and a TeamMember to in reality reflect a UserOwner and a UserMember because they take on so many characteristics of the remote User object that a hybridization happens unwittingly.
 
@@ -233,8 +261,6 @@ Looking at the zoomed Map in Figure 3.8, we see that the resource URIs provide n
 <Figures figure="3-8">A zoom in on the Anticorruption Layer and Open Host Service of the integration between the Agile Project Management Context and the Identity and Access Context</Figures>
 
 A custom media type indicates that two resources can be requested:
-
-Click here to view code image
 
 ```java
 application/vnd.saasovation.idovation+json
@@ -267,6 +293,7 @@ We should not focus on the technologies or integration products involved. Rather
 The diagrams and supporting text exemplify how we might create Context Map documents. It need not be extensive but should provide enough background and explanation to bring a new project member up to speed. However, create a document only if it is helpful to the team.
 
 Integration with the Collaboration Context
+
 Next, let’s consider how the Agile Project Management Context interacts with the Collaboration Context. Here, too, we strive for autonomy, but this raises the bar, posing some interesting challenges to accomplish the goal of system independence.
 
 ProjectOvation has add-on features that are supplied by CollabOvation. Some include project-based forum discussions and shared calendar scheduling. Users won’t directly interact with CollabOvation. ProjectOvation must determine whether the options are available to a given tenant and, if so, on its own facilitate resource creation in CollabOvation.
@@ -282,19 +309,19 @@ Precondition: The collaboration feature is enabled (option was purchased).
 
 A Forum and a Discussion must be created in the Collaboration Context on behalf of the Product. In contrast, this is unlike the Identity and Access Context where a tenant has already been provisioned and users, groups, and roles have been defined, and notifications about those events are available. In that case the objects are preexisting. In this case the Agile Project Management Context needs objects that don’t exist yet and won’t exist until it requests them. That’s a potential obstacle to autonomy because we depend on the availability of the Collaboration Context in order to create resources remotely. With desired autonomy, this raises an interesting challenge.
 
+::: tip
 Why Is Discussion Used in Both Contexts?
 
 This is an interesting situation because it’s one where the name of the concept, Discussion, is the same in both Bounded Contexts, but they are different types, different objects, and thus have different state and different behavior.
 
 In the Collaboration Context a Discussion is an Aggregate and it manages a set of Posts—implicit children that are themselves Aggregates. In the Agile PM Context the Discussion is a Value Object and only holds a reference to the actual Discussion with Posts in the foreign Context. Note, however, that in Chapter 13 when the team implements the integrations, they discover that they should strongly type the different kinds of Discussions in the Agile PM Context.
+:::
 
 We need to leverage eventual consistency using Domain Events (8) and an Event-Driven Architecture (4). There’s nothing that says that only remote systems can consume notifications produced by our local system. When a ProductInitiated Domain Event is published by our model, it is handled by our own system. The local handler requests the Forum and Discussion to be created remotely. This could be done via RPC or messaging, depending on what CollabOvation supports. If using RPC and the remote collaboration system were not available at that time, the local handler would simply keep trying on a periodic basis until it finally met with success. If messaging is supported instead of RPC, the local handler would send a message to the collaboration system. In turn, collaboration would respond with its own message when resource creation completes. When the Event handler back in ProjectOvation received this notification, it would update the Product with an identity reference to its newly created discussion.
 
 What happens if the product owner or team members try to use the discussion prior to its existence? Is the unavailable discussion considered a bug in the model? Will it cause the system to exhibit an unreliable condition? Consider the fact that any given subscriber may not have paid to use the collaboration add-on in the first place. That’s a nontechnical reason to design in resource unavailability. Working around eventual consistency is in no way a kludge. It’s just another valid state that should be modeled.
 
 An elegant way to handle all of the possible unavailability scenarios is to make them explicit. Consider this Standard Type implemented as a State [Gamma et al.], as described in Value Objects (6):
-
-Click here to view code image
 
 ```java
 public enum DiscussionAvailability {
@@ -339,3 +366,15 @@ This examination has gone into some useful detail on Context Maps. We need to ex
 Produce Context Maps that you can post on the wall. You can upload them to a team wiki as long as it’s not just the project’s attic where nobody ever goes. Keep discussions about the project flowing back to your Map to stimulate useful refinements.
 
 ![](./figures/ch3/own_it.jpg)
+
+## 3.2 WRAP-UP 本章小结
+
+That was definitely a productive session with Context Mapping.
+
+- We’ve discussed what Context Maps are, what help they provide to your team, and how you can create them with ease.
+- You took a detailed look into SaaSOvation’s three Bounded Contexts and their supporting Context Maps.
+- Using mapping, you zoomed in on the integrations between each of the Contexts.
+- You examined the boundary objects supporting Anticorruption Layer and their interactions.
+- You saw how to produce a Translation Map showing the local mapping between REST-based resources and the corresponding object in the consuming domain model.
+
+Not every project will need the level of detail demonstrated here. Others may require more. The trick is to balance the need to understand with practicality and not pile too much detail into this level. Remember that we are likely not going to keep a very detailed graphical Map up-to-date far into the project. We’ll benefit most from what can be posted on a wall, enabling team members to point at them during discussions. If we reject ceremony and embrace simplicity and agility, we’ll produce useful Context Maps that help us move forward rather than bog down the project.

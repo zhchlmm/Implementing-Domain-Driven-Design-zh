@@ -12,6 +12,7 @@ There are three things you are going to have to understand very clearly:
 
 Just because all these concepts were discussed in detail in the second half of [Evans] does not mean that they are of secondary importance. To succeed in implementing DDD, you have to get these right.
 
+::: tip
 Road Map to This Chapter
 
 - Grasp the big picture of DDD by understanding Domains, Subdomains, and Bounded Contexts.
@@ -19,8 +20,9 @@ Road Map to This Chapter
 - Consider a practical real-world Domain with multiple Subdomains.
 - Make sense of Bounded Contexts, both conceptually and technically.
 - See SaaSOvation’s “aha!” moments as they discover strategic design.
+  :::
 
-## BIG PICTURE
+## 2.1 BIG PICTURE 总览
 
 A Domain, in the broad sense, is what an organization does and the world it does it in. Businesses identify a market and sell products and services. Each kind of organization has its own unique realm of know-how and way of doing things. That realm of understanding and its methods for carrying out its operations is its Domain. When you develop software for an organization, you are working in its Domain. It should be pretty obvious to you what your Domain is. You work in it.
 
@@ -32,7 +34,7 @@ So, if a domain model shouldn’t be all-inclusive of what the organization does
 
 Almost every software Domain has multiple Subdomains. It really doesn’t matter whether the organization is huge and extremely complex or consists of just a few people and the software they use. There are different functions that make any business successful, so it’s advantageous to think about each of those business functions separately.
 
-## Subdomains and Bounded Contexts at Work
+### 2.1.1 Subdomains and Bounded Contexts at Work 工作中的子域和限界上下文
 
 Here’s a fairly simple example to introduce how Subdomains can be used. Think of a retail company that sells products online. The products it sells could be just about anything, so we won’t think too carefully about them. To do business in this Domain, the company must present a catalog of products to shoppers, it must allow orders to be placed, it must collect payment for the products sold, and it must ship the products to buyers. This online retailer’s Domain seems to be composed of these four primary Subdomains: Product Catalog, Orders, Invoicing, and Shipping. The upper part of Figure 2.1 shows the e-Commerce System.
 
@@ -90,7 +92,7 @@ Speaking of integration, Figure 2.1 further shows that Bounded Contexts in an en
 
 That’s the high-level summary of one view of a simple business domain. We’ve briefly encountered a Core Domain and gotten the notion that it is an important part of DDD. Now we need to understand it better.
 
-## Focus on the Core Domain
+### 2.1.2 Focus on the Core Domain 将关注点放在核心域上
 
 With an understanding of Subdomains and Bounded Contexts, consider an abstract view of a different Domain found in Figure 2.2. This could represent any domain, perhaps even the one you work in. I’ve removed the explicit names so you can mentally fill in the blanks. Naturally, our business goals are on a path of continuous refinement and expansion reflected by ever-changing Subdomains and the models within. This diagram only captures the whole business Domain at a moment in time with a specific perspective, and one that could be somewhat short-lived.
 
@@ -128,10 +130,11 @@ Not only will you learn a lot from them, but you’ll gain valuable experience i
 
 What you’ve just learned is the big-picture foundation of strategic design.
 
-## WHY STRATEGIC DESIGN IS SO INCREDIBLY ESSENTIAL
+## 2.2 WHY STRATEGIC DESIGN IS SO INCREDIBLY ESSENTIAL 战略设计为什么重要
 
 OK, you’ve learned some DDD terminology and the meaning behind it, but not much has been said about why this is so important. I’ve really just asserted that it is very important and hoped that you’d believe me. But like most statements of “fact,” I’d better back my assertion now. Let’s jump in on our running example, that of the projects going on at SaaSOvation. They’ve managed to get themselves into a real jam.
 
+::: tip
 ![](./figures/ch2/domain_expert.jpg)
 
 Early on in their first effort with DDD, the collaboration project team began to veer off the path to developing a clean model. This happened because they didn’t understand strategic design, not even at its most basic level. As is true of most developers, their focus was on the details of Entities (5) and Value Objects (6), which obscured their vision of the bigger picture. They blended their core concepts with generic ones, causing the creation of two models in one. Before long they started to feel the pain of the design reflected in Figure 2.3. The bottom line? They had not fully achieved the goal of implementing DDD.
@@ -153,13 +156,17 @@ It would be easy for the team to conclude that they only needed to factor out th
 Taking a more vigorous approach to clean modeling would help them avoid a more insidious problem. They were probably leaning toward working their way into a Big Ball of Mud (3). It wasn’t just that their User and Permission concepts were not properly modularized. While modularization is an essential DDD modeling tool, it doesn’t fix linguistic misalignment.
 
 The senior developer was very concerned that, if left unchecked, this situation could easily lead to an undisciplined mindset that would allow more tangle to eventually creep in subtly. In time, as the team faced modeling another set of noncollaboration concepts, the Core Domain would become even less clear. They could end up with only an implicit model with source code that wouldn’t reflect an expressive Ubiquitous Language of Collaboration. What the team really needed to understand was their business Domain, its Subdomains, as well as the Bounded Contexts they were developing. Doing so would prevent the entry of the dastardly foe of strategic design, the muck of the Big Ball of Mud. Thus, the team needed to gain a strategic modeling mindset.
+:::
 
+::: tip
 Oh, No! There’s That Word Design Again!
 
 If you think that design is a dirty word when agile is in practice, it’s not with DDD. Using DDD with agile is completely natural. Always keep design in check with agile. Design need not be heavy.
+:::
 
 Yeah, that was an important lesson to learn. They did manage to work their way through it with a lot of research and finally got a handle on their Domain and Subdomains. How they did that will be presented soon.
 
+::: tip
 Alignment with the DDD Community
 
 The running examples in this book are provided as three Bounded Contexts. These Bounded Contexts are likely different from those you work with. The examples present fairly typical modeling situations. However, not everyone would agree that Users and Permissions should be separated out of a given Core Domain. Perhaps in some cases it might make sense to intertwine them with your Core model. As always, that is the choice of a specific team. In my experience, however, this is one of the basic problems encountered by those new to DDD, and one that misleads their implementation efforts into an unnecessarily messy result. Another common misstep would be to meld the collaboration and agile project management models into one. These are only a few common problems. Other common modeling errors are discussed in each chapter.
@@ -169,8 +176,9 @@ At a minimum, the problems posed here, and those that follow, are representative
 My goal is to teach the principles of implementing DDD using the simplest, yet nontrivial, examples possible. I can’t afford to allow the examples to get in the way of my teaching and your learning. If I demonstrate that identity and access management, collaboration, and agile project management all have separate linguistics, readers are well served by what the examples emphasize. Since it is each team’s choice to discover the linguistic drivers that they find important, and that help them achieve the vision of their domain experts, assume that there is no mistake in the “ultimate correct” conclusions reached by the SaaSOvation developers and the modeling choices they made in their DDD implementation journey.
 
 All of my guidance regarding Subdomains and Bounded Contexts is closely aligned with that of the broader DDD community, as it reflects my own experience. Other DDD leaders may have a slightly different focus. However, my explanations definitely provide a firm foundation for any team to move forward without ambiguity. Clearing the murky areas of DDD is the most important service to the community, and it is my primary goal. It should be your goal to put these guidelines to use in the most practical way to benefit your project.
+:::
 
-## REAL-WORLD DOMAINS AND SUBDOMAINS
+## 2.3 REAL-WORLD DOMAINS AND SUBDOMAINS 现实世界中的领域和子域
 
 I have something more to tell you about domains. They have both a problem space and a solution space. The problem space enables us to think of a strategic business challenge to be solved, while the solution space focuses on how we will implement the software to solve the problem of the business challenge. Here’s how that fits into what you’ve already learned:
 
@@ -220,9 +228,11 @@ Yet another Bounded Context, the Purchasing Context, will be developed in order 
 
 The ERP purchasing module is as a whole a Generic Subdomain. That’s because you could replace this Subdomain with any off-the-shelf purchasing system as long as it fulfills your basic business needs. However, being used along with the new Purchasing Context in the Purchasing Subdomain makes it work in a Supporting fashion.
 
+::: tip
 You Can’t Change the World of Bad Software Design
 
 In a typical brownfield enterprise you are going to have undesirable situations like those illustrated in Figures 2.1 and 2.4. This means that Subdomains in poorly designed software will not align in an ideal way, one-to-one, with Bounded Contexts. You can’t change the world of bad software design. You can only hope to implement proper DDD in projects you work on. In the end you will have to integrate with and even work in brownfield domains, so be prepared to exercise the techniques taught in the first one-third of this chapter as you analyze the multiple implicit models found in a single, brown Bounded Context.
+:::
 
 Sticking with Figure 2.4, the Optimal Acquisition Context must also interact with the Inventory Context. Inventory manages warehousing items. It uses the ERP inventory module, which falls within the Inventory (Supporting) Subdomain. As a convenience to delivery contractors, the Inventory Context can provide maps and directions to each of its warehouses from an origin location by using an external geographical mapping service. From the Inventory Context point of view, there is nothing special about mapping. There are several geographical mapping services to choose from, and there may be advantages to changing the chosen mapping system over time. The mapping service is itself a Generic Subdomain, but it is consumed by a Supporting Subdomain.
 
@@ -236,13 +246,15 @@ What are the Bounded Contexts in your solution space? At this point you should b
 
 So, for the balance of this chapter we are going to shift gears and consider the importance of Bounded Contexts as an essential solution space modeling tool for DDD. In Context Maps (3) the discussion primarily stresses how to deal with mapping different, but related, Ubiquitous Languages, by integrating their Bounded Contexts.
 
-## MAKING SENSE OF BOUNDED CONTEXTS
+## 2.4 MAKING SENSE OF BOUNDED CONTEXTS
 
 Don’t forget, a Bounded Context is an explicit boundary within which a domain model exists. The domain model expresses a Ubiquitous Language as a software model. The boundary is created because each of the model’s concepts inside, with its properties and operations, has a special meaning. If you are a member of such a modeling team, you’d know exactly the meaning of each of the concepts in your Context.
 
+::: tip
 Bounded Context Is Explicit and Linguistic
 
 A Bounded Context is an explicit boundary within which a domain model exists. Inside the boundary all terms and phrases of the Ubiquitous Language have specific meaning, and the model reflects the Language with exactness.
+:::
 
 It is often the case that in two explicitly different models, objects with the same or similar names have different meanings. When an explicit boundary is placed around each of the two models individually, the meaning of each concept in each Context is certain. Thus, a Bounded Context is principally a linguistic boundary. You should use these points of reasoning as a touchstone to determine if you are correctly using Bounded Contexts.
 
@@ -264,6 +276,7 @@ Looking at Figure 2.5, there is nothing characteristic of the Account types by n
 
 These two Bounded Contexts are probably not in the same Domain. The point is to demonstrate that context is king.
 
+::: tip
 Context Is King
 
 Context is king, especially when implementing DDD.
@@ -271,6 +284,7 @@ Context is king, especially when implementing DDD.
 In the financial world the word security is often used. The Securities and Exchange Commission (SEC) restricts the term security to use with equities. Now consider this: Futures contracts are commodities and not under the jurisdiction of the SEC. However, some financial firms call Futures by the name security as a reference but mark them with the Standard Type (6) Futures.
 
 Is that the best Language for a Future? It depends on the Domain it’s used in. Some would obviously say it is, while others would insist that it isn’t. Context is also cultural. Inside a given firm that trades Futures, it may align best with the culture to use the term Security in a specific Ubiquitous Language.
+:::
 
 It is often the subtly different meanings that are most commonly faced in your enterprise. Here’s why. The name chosen by each team in each Context is always made with the Ubiquitous Language in mind. You never name a concept arbitrarily, such as to purposely distinguish it from a term in a different Context. Consider two banking Contexts, one for checking accounts and one for savings accounts.4 We don’t need to give the name Checking Account to the object in the Checking Context or the name Savings Account to the object in the Savings Context. Both concepts may safely be named Account because each Bounded Context distinguishes subtle meanings. Of course, there is no rule that says that more meaning cannot be added to these names. That’s the decision of your team.
 
@@ -311,15 +325,13 @@ Whiteboard Time
 
 Generally you can determine a proper separation because the similar objects have different properties and operations. In that case the boundary has separated the concepts appropriately. However, if you see the exact same objects in multiple contexts, it probably means there is some modeling error, unless the two Bounded Contexts are using a Shared Kernel (3).
 
-## Room for More than the Model
+### 2.4.1 Room for More than the Model 限界上下文不仅仅包含模型
 
 A Bounded Context does not necessarily encompass only the domain model. True, the model is the primary occupant of the conceptual container. However, a Bounded Context is not limited to the model only. It often marks off a system, an application, or a business service.5 Sometimes a Bounded Context houses less than this if, for example, a Generic Subdomain can be produced without much more than a domain model. Consider portions of a system that are typically part of a Bounded Context.
 
 5. Admittedly the meanings of system, application, and business service are not always agreed upon. However, in a general sense I intend these to mean a complex set of components that interact to realize a set of significant business use cases.
 
 When the model drives the creation of a persistence database schema, the database schema will live inside the boundary. This is the case because the schema is designed, developed, and maintained by the modeling team. It means that the database table names and column names, for example, will directly reflect names used in the model, rather than names translated to another style. For example, say our model has a class named BacklogItem and that class has Value Object properties named backlogItemId and businessPriority:
-
-Click here to view code image
 
 ```java
 public class BacklogItem extends Entity  {
@@ -331,8 +343,6 @@ public class BacklogItem extends Entity  {
 ```
 
 We would expect to see those mapped to the database in like manner:
-
-Click here to view code image
 
 ```sql
 CREATE TABLE `tbl_backlog_item` (
@@ -354,9 +364,11 @@ Users of the system/application are not always limited to humans and may include
 
 Both user interface components and service-oriented endpoints delegate to Application Services (14). These are different kinds of services, generally providing security and transaction management, and acting as Facade [Gamma et al.] to the model. They are task managers, transforming use case flow requests into the execution of domain logic. Application Services are also inside the boundary.
 
+::: tip
 More on Architectural and Application Concerns
 
 If you want to consider how DDD fits with various architectural styles, see Architecture (4). Also, Application Services are treated specially in Application (14). There are helpful diagrams and code snippets in both chapters.
+:::
 
 The Bounded Context primarily encapsulates the Ubiquitous Language and its domain model, but it includes what exists to provide interaction with and support of the domain model. Pay attention to keeping the aspects of each Architectural concern in their proper place.
 
@@ -366,7 +378,7 @@ Whiteboard Time
 - If there is a user interface and a set of Application Services, make sure they are inside the boundary. (You have flexibility in how you represent these. See Figures 2.8, 2.9, and 2.10 for some ideas for representing various components.)
 - If your database schema or other persistence store was developed for your model, make sure it is also inside the boundary. (Figures 2.8, 2.9, and 2.10 provide one way to represent a database schema.)
 
-## Size of Bounded Contexts
+### 2.4.2 Size of Bounded Contexts 限界上下文的大小
 
 How many Modules (9), Aggregates (10), Events (8), and Services (7)—the primary building blocks of a domain model created using DDD—should a Bounded Context contain? That’s a bit like asking, “How long is a piece of string?” A Bounded Context should be as big as it needs to be in order to fully express its complete Ubiquitous Language.
 
@@ -380,9 +392,11 @@ In the film Amadeus6 there is a scene where the Austrian emperor Joseph II commu
 
 Of course this is rarely as easy for each of us to achieve as when Mozart would compose a symphony with the ease of writing a letter to a friend. At any given time we may have missed an opportunity to refine the domain model to some degree. During each iteration we challenge our assumptions about the model, which forces us to add or remove a concept or change the way concepts behave and collaborate. But the point is that we face that challenge time and again, and using DDD principles we give serious consideration to what belongs and what does not. We use Bounded Context and tools such as Context Maps to help analyze what is truly part of a Core Domain. We don’t resort to applying arbitrary segregation rules based on non-DDD principles.
 
+::: tip
 The Beautiful Sound of Domain Models
 
 If our models were music, they would have the unmistakable sound of completeness, purity, power, and possibly even elegance and beauty.
+:::
 
 If we constrain a given Bounded Context too stringently, gaping holes result from vital but missing contextual concepts. And if we keep piling concepts onto the model that don’t express the core of the business problem being solved, we will muddy the waters so much that we will fail to observe and understand what is essential. Our goal? If our models were music, they would have the unmistakable sound of completeness, purity, power, and possibly even elegance and beauty. The number of notes—the Modules, Aggregates, Events, and Services inside—would be neither more nor less than what the correct design requires. Those “listening” in on the model would never have to ask what that strange “sound” is in the middle of an otherwise harmonious symphony. Nor would they be distracted by moments of complete silence caused by a missing page or two of musical notes.
 
@@ -404,11 +418,13 @@ Even if you don’t yet have an explicit model, still think of the Language with
 
 - Inside the ellipse, write the names of the primary concepts that you are sure your code implements. See if you can spot concepts that should be there but are missing, and those that are there but shouldn’t be. What should you do about each of those problems?
 
+::: tip
 Be Careful to Practice DDD Using Linguistic Drivers
 
 The bottom line: If you are not following the Language drivers, you are not working with and listening to domain experts to create the Bounded Context. Think carefully about the size of your Bounded Contexts. Don’t be too quick to miniaturize them.
+:::
 
-## Aligning with Technical Components
+### 2.4.3 Aligning with Technical Components 与技术组件保持一致
 
 It doesn’t hurt to think about a Bounded Context in terms of the technical components that house it. Just keep in mind that technical components don’t define the Context. Let’s consider some common ways that they are composed and deployed.
 
@@ -420,31 +436,28 @@ com.mycompany.optimalpurchasing
 
 The source tree of this Bounded Context would be further divided according to Architectural responsibilities. Here’s a view of the project’s possible second-level package names:
 
-Click here to view code image
-
 ```java
 com.mycompany.optimalpurchasing.presentation
-
 com.mycompany.optimalpurchasing.application
-
 com.mycompany.optimalpurchasing.domain.model
-
 com.mycompany.optimalpurchasing.infrastructure
 ```
 
 Even with these modular divisions, only a single team should work in a single Bounded Context.
 
+::: tip
 A Single Team for a Single Bounded Context
 
 Assigning a single team to work on a single Bounded Context is not an attempt to limit flexibility to team organization. It’s not as if teams can’t be arranged as needed, or that individual members of one team cannot be used on one or more other projects. A company should use people in the way that best fits its needs. This is simply stating that it is best for one well-defined, cohesive team of domain experts and developers to focus on one Ubiquitous Language modeled in an explicit Bounded Context. If you assign two or more distinct teams to one Bounded Context, each team will contribute to a divergent and ill-defined Ubiquitous Language.
 
 There is also the possibility that two teams will cooperate in the design of a Shared Kernel, which is actually not a typical Bounded Context. This Context Mapping pattern forms an intimate relationship between two teams, which requires ongoing consultation when model changes are deemed necessary. This modeling approach is less common and is generally avoided if possible.
+:::
 
 When using Java, we may technically house a Bounded Context in one or more JAR files, including WAR or EAR files. The desire for modularization may have an influence here. Loosely coupled parts of the domain model could be housed in separate JAR files, enabling them to be deployed independently by version. This would be especially useful with large models. Creating multiple JAR files of a single model would provide the advantage of managing versions of its elements using OSGi bundles or using Java 8 Jigsaw modules. Thus, various high-level modules, their versions, and their dependencies could be managed as bundles/modules. There are at least four such bundles/modules represented by the preceding DDD-based, second-level Modules, and possibly more.
 
 For a native Windows Bounded Context, such as for the .NET platform, deployment would be done using separate assemblies in DLL files. Think of a DLL as having similar deployment motivations to those of JAR described previously. The model could be partitioned for deployment in similar ways. All common language runtime (CLR) modularization is managed through assemblies. The specific version of an assembly and the versions of dependent assemblies are recorded in the assembly’s manifest. See [MSDN Assemblies].
 
-## SAMPLE CONTEXTS
+## 2.5 SAMPLE CONTEXTS 示例上下文
 
 Because the samples represent a greenfield development environment, the three chosen Bounded Contexts eventually align in the most desirable way, one-to-one, with their respective Subdomains. The team wasn’t successful in aligning them one-to-one from the start, which teaches a crucial lesson. The ultimate outcome is shown in Figure 2.7.
 
@@ -456,7 +469,7 @@ Let’s look at the three Bounded Contexts provided as sample DDD implementation
 
 7. Note that Context Maps provides more detail about the actual three sample Bounded Contexts, how they are related to each other, and how they are integrated. Still, more depth is concentrated on the Core Domain.
 
-## Collaboration Context
+### 2.5.1 Collaboration Context 协作上下文
 
 Business collaboration tools are one of the most important areas for creating and facilitating a synergistic workplace in the fast-paced economy. Anything that can help increase productivity, transfer knowledge, promote idea sharing, and associatively manage the creative process so results will not be misplaced is a boon to the corporate success equation. Whether the software tools offer features for broad communities or for narrow audiences targeted to daily activities and projects, corporations are flocking to the best-of-breed online tools, and SaaSOvation wants a share of that market.
 
@@ -466,13 +479,12 @@ The core team tasked to design and implement the Collaboration Context was given
 
 Now, to the team experience . . .
 
+::: tip
 Tactical DDD was used from the inception of product development, but the team was still learning some of DDD’s finer points. In fact, they were really using what amounted to DDD-Lite, employing the tactical patterns mostly for a technical payoff. Sure, they were attempting to capture the Ubiquitous Language of collaboration, but they didn’t understand that the model had clear limits that couldn’t be stretched too far. As a result, they made a mistake by baking security and permissions into the collaboration model. The team realized well into the project that designing security and permissions as part of their model was not as desirable as they once thought.
 
 ![](./figures/ch2/team_huddle-c2.jpg)
 
 Early on they were not overly concerned about or fully aware of the danger of constructing an application silo. Yet, without using a central security provider, that’s just what would happen. It constituted mixing two models in one. Soon enough they learned that the confusing entanglement that resulted from blending security concerns into their Core Domain had backfired. Right in the middle of core business logic, in behavioral methods, developers would check for client permissions to carry out the request:
-
-Click here to view code image
 
 ```java
 public class Forum extends Entity {
@@ -531,8 +543,6 @@ Likely the future Identity and Access Bounded Context would look different from 
 
 Since the development of the Segregated Core became an interim step, we don’t focus on those results here. Briefly, it amounted to moving all security and permissions classes to segregated Modules and requiring Application Services clients to check security and permissions using those objects prior to calling into the Core Domain. That freed the Core to implement only collaboration model object compositions and behaviors. The Application Service took care of security and object translation:
 
-Click here to view code image
-
 ```java
 public class ForumApplicationService ... {
     ...
@@ -563,8 +573,6 @@ public class ForumApplicationService ... {
 ```
 
 The result to the Forum looked like this:
-
-Click here to view code image
 
 ```java
 public class Forum extends Entity {
@@ -600,10 +608,11 @@ This removed the User and Permission tangle and focused the model strictly on co
 Granted, the team could have started out going in the other direction. They could have miniaturized Bounded Contexts by creating a number of separate ones, ending up with ten or more total—one for each collaboration facility (for example, Forum and Calendar as separate models). What could have led them in that direction? Since most of the collaboration facilities were not coupled to the others, each could be deployed as an autonomous component. By placing each facility in a separate Bounded Context, the team could create ten or so natural deployment units. True, but producing ten different domain models was unnecessary to achieve those deployment objectives and would probably only serve to work against the modeling principles of the Ubiquitous Language.
 
 Instead, the team kept the model as one but chose to create a separate JAR file for each collaboration facility. Using Jigsaw modularization, they created a version-based deployment unit for each. Besides JAR files for the natural collaboration divisions, they also needed one for shared model objects, such as Tenant, Moderator, Author, Participant, and others. Going this route supported the development of a unified Ubiquitous Language, while meeting the deployment objectives that had architectural and application management advantages.
+:::
 
 With this understanding we can examine how the Identity and Access Context came about.
 
-## Identity and Access Context
+### 2.5.2 Identity and Access Context 身份与访问上下文
 
 Most enterprise applications today need to have some form of security and permissions components in place to ensure that people who try to use the system are authentic users and are authorized to do what they attempt to do. As we just analyzed, a naive approach to application security builds users and permissions in with each discrete system, which creates a silo effect in every application.
 
@@ -619,9 +628,11 @@ LB: “I don’t think you really understand the book.”
 
 The users of one system cannot be easily associated with the users of any other systems, even though many of the people using them are the same. To prevent silos from popping up all over the business landscape, architects need to centralize security and permissions. This is done by purchasing or developing an identity and access management system. The route chosen will depend much on the level of sophistication needed, the time available, and the total cost of ownership.
 
+::: tip
 ![](./figures/ch2/team_huddle-c3.jpg)
 
 Correcting the identity and access tangle in CollabOvation would be a multistep process. First the team refactored using Segregated Core [Evans]; see the “Collaboration Context” section. This step served the intended purpose at the time to ensure that CollabOvation was cleansed of security and permissions concerns. However, they figured that identity and access management should eventually occupy a context boundary of its own. That would require an even greater effort.
+:::
 
 This constitutes a new Bounded Context—the Identity and Access Context—and will be used by other Bounded Contexts through standard DDD integration techniques. To the consuming contexts the Identity and Access Context is a Generic Subdomain. The product will be named IdOvation.
 
@@ -633,13 +644,15 @@ As a more advanced step, throughout the model Domain Events (8) are published wh
 
 The next chapter, “Context Maps,” shows how the Identity and Access Context is used by the other two sample Contexts using DDD integration patterns.
 
-## Agile Project Management Context
+### 2.5.3 Agile Project Management Context 敏捷项目管理上下文
 
 The lightweight methods of agile development have propelled it to popularity, especially following the creation of the Agile Manifesto in 2001. In its vision statement, SaaSOvation has as its second primary and strategic initiative to develop an agile project management application. Here’s how things went . . .
 
+::: tip
 After three quarters of successful CollabOvation subscription sales, planned upgrades with incremental improvements per customer feedback, and better-than-expected revenues, the company’s plans for ProjectOvation were launched. It’s their new Core Domain, and top developers from CollabOvation will be pulled in to leverage their SaaS multi-tenancy and newfound DDD experience.
 
 ![](./figures/ch2/team_meeting-2.jpg)
+
 The tool focuses on management of agile projects, using Scrum as the iterative and incremental project management framework. ProjectOvation follows the traditional Scrum project management model, complete with product, product owner, team, backlog items, planned releases, and sprints. Backlog item estimation is provided through business value calculators that use cost-benefit analysis.
 
 The business plan began with a two-headed vision. CollabOvation and ProjectOvation would not go down entirely separate paths. SaaSOvation and its board of directors envisioned innovation around weaving collaboration tools in with agile software development. Thus, CollabOvation features will be offered as an optional add-on to ProjectOvation. Because it provides add-on features, CollabOvation is a Supporting Subdomain to ProjectOvation. Product owners and team members will interact in product discussions, release and sprint planning, and backlog item discussions, and they will share calendars, and more. There is a future plan to include corporate resource planning with ProjectOvation, but initial agile product goals must first be met.
@@ -653,16 +666,19 @@ Figure 2.10 shows that as a result of adopting a strategic design mentality, the
 <Figures figure="2-10">The Agile Project Management Context. The Ubiquitous Language of this Bounded Context is concerned with Scrum-based agile products, iterations, and releases. For readability, some components, including those from the UI and Application Services, are not shown here.</Figures>
 
 One requirement calls for ProjectOvation to operate as a set of autonomous application services. The team desires to limit the dependency of ProjectOvation on other Bounded Contexts to a reasonable periodicity, or at least as much as is practical. Generally speaking, ProjectOvation will be capable of operating on its own, and if IdOvation or CollabOvation were to go offline for any number of reasons, ProjectOvation would continue to function autonomously. Of course, in that case some things might get out of sync for a while, and probably a very short while at that, but the system would continue to function.
+:::
 
+::: tip
 The Context Gives Each Term a Very Specific Meaning
 
 A Scrum-based Product has any number of BacklogItem instances that describe the software being constructed. This is far different from the products on an e-commerce site that you put in a shopping cart to purchase. How do we know? Because of the Context. We understand what our Product means because it is in the Agile PM Context. In an Online Store Context, Product means something very different. The team didn’t need to name the product ScrumProduct in order to communicate the difference.
+:::
 
 The Core Domain of Product, Backlog Items, Tasks, Sprints, and Releases is already off to a better start given the SaaSOvation experience gains. Still, we are interested in looking in on the big lessons they learned along the steep learning curve of carefully modeling Aggregates (10).
 
 ![](./figures/ch2/own_it.jpg)
 
-## WRAP-UP
+## 2.6 WRAP-UP 本章小结
 
 That was a seriously intense discussion of the importance of DDD strategic design!
 

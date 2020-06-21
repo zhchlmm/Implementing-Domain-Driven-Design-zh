@@ -228,8 +228,6 @@ Look at What Anemia Does to Your Model
 
 All right, so let’s say we can agree that this is both true and vexing to us. What does anemia everywhere have to do with memory loss? When you are reading through the client code of an Anemic Domain Model (for example, the impostor Application Service (4, 14), à la Transaction Script), what do we usually see? Here’s a rudimentary example:
 
-Click here to view code image
-
 ```java
 @Transactional
 public void saveCustomer(
@@ -270,8 +268,6 @@ Admittedly, this example is not from a very interesting domain, but it does help
 What did this code just do? Actually it’s pretty versatile code. It saves a Customer no matter whether it is new or preexisting. It saves a Customer no matter whether the last name changed or the person moved to a new home. It saves a Customer no matter whether the person got a new home phone number or discontinued home phone service, or whether he or she got a mobile phone for the first time, or both. It even saves a Customer who switched from using Juno to using Gmail instead, or who changed jobs and now has a new work e-mail address. Wow, this is an awesome method!
 
 Or is it? Actually, we have no idea under what business situations this saveCustomer() method is used—not exactly, anyway. Why was this method created in the first place? Does anyone remember its original intent, and all the motivations for changing it to support a wide variety of business goals? Those memories were quite likely lost only a few weeks or months after the method was created and then modified. And it gets even worse. You don’t believe me? Look at the next version of this same method:
-
-Click here to view code image
 
 ```java
 @Transactional
@@ -424,8 +420,6 @@ Since team speech and the code will be the lasting expression of the Ubiquitous 
 
 With this knowledge we can redesign the saveCustomer() example. What if we chose to make Customer reflect each of the possible business goals that it must support?
 
-Click here to view code image
-
 ```java
 public interface Customer {
     public void changePersonalName(
@@ -444,8 +438,6 @@ public interface Customer {
 We can argue that this is not the best model for a Customer, but when implementing DDD, questioning the design is expected. As a team we are free to haggle over what is the best model and settle only after we’ve discovered the Ubiquitous Language that is agreed upon. Still, the preceding interface does explicitly reflect the various business goals that a Customer must support, even if the Language could be improved by refinements again and again.
 
 It’s important to understand too that the Application Service would also be refactored to reflect the explicit intentions of the business goals at hand. Each Application Service method would be modified to deal with a single use case flow or user story:
-
-Click here to view code image
 
 ```java
 @Transactional
@@ -603,8 +595,6 @@ Again, what happens if we simply provide data accessors to our model? To reempha
 
 The first example, as is commonly done today, uses attribute accessors:
 
-Click here to view code image
-
 ```java
 public class BacklogItem extends Entity {
     private SprintId sprintId;
@@ -623,8 +613,6 @@ public class BacklogItem extends Entity {
 
 As for the client of this model:
 
-Click here to view code image
-
 ```java
 // client commits the backlog item to a sprint
 // by setting its sprintId and status
@@ -634,8 +622,6 @@ backlogItem.setStatus(BacklogItemStatusType.COMMITTED);
 ```
 
 The second example uses a domain object behavior that expresses the Ubiquitous Language of the domain:
-
-Click here to view code image
 
 ```java
 public class BacklogItem extends Entity {
@@ -666,8 +652,6 @@ public class BacklogItem extends Entity {
 ```
 
 The client of this explicit model seems to operate on safer ground:
-
-Click here to view code image
 
 ```java
 // client commits the backlog item to a sprint
