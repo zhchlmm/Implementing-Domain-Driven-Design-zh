@@ -43,7 +43,7 @@ When you care only about the attributes of an element of the model, classify it 
 
 As easy as it may be to create a Value type, sometimes those inexperienced with DDD face confusion when trying to choose whether to model an Entity or a Value in a specific instance. The truth is that even experienced designers struggle with this from time to time. Along with showing you how to implement a Value, I hope to clear up some of the mystery around the sometimes confusing decision-making process.
 
-## VALUE CHARACTERISTICS 值对象的特征
+## 6.1 VALUE CHARACTERISTICS 值对象的特征
 
 As a first order of business, make certain when modeling a domain concept as a Value Object that you are addressing the Ubiquitous Language. Consider this to be an overarching principle and a characteristic that must be achieved. I imply this principle throughout the chapter.
 
@@ -58,19 +58,17 @@ When you are trying to decide whether a concept is a Value, you should determine
 
 It will help to understand each of these characteristics in more detail. By employing this approach to analyzing design elements in the model, you may find that you should use Value Objects far more often than you may have before.
 
-## Measures, Quantifies, or Describes 度量或描述
+### 6.1.1 Measures, Quantifies, or Describes 度量或描述
 
 When you have a true Value Object in your model, whether you realize it or not, it is not a thing in your domain. Instead, it is actually a concept that measures, quantifies, or otherwise describes a thing in the domain. A person has an age. The age is not really a thing but measures or quantifies the number of years the person (thing) has lived. A person has a name. The name is not a thing but describes what the person (thing) is called.
 
 This is closely related to the Conceptual Whole characteristic.
 
-## Immutable 不变性
+### 6.1.2 Immutable 不变性
 
 An object that is a Value is unchangeable after it has been created.1 When programming in Java or C#, for example, you use one of the Value class’s constructors to create an instance, passing in as parameters all objects on which its state will be based. The parameters may be the objects that will directly serve as the attributes of the Value, or they may be objects that will be used to derive one or more newly constituted attributes during construction. Here’s an example of a Value Object type that holds a reference to another Value Object:
 
 1. There are times when a Value Object can be designed as mutable, but the need is usually rare. I don’t dwell on mutable Values here. If you are interested in when to use a mutable Value type, please see the sidebar on page 101 of [Evans].
-
-Click here to view code image
 
 ```java
 package com.saasovation.agilepm.domain.model.product;
@@ -100,15 +98,13 @@ If you think that the object you are designing must be mutated by its behavior, 
 Sometimes it makes no sense for an object to be immutable. That’s perfectly fine, and it indicates that the object should be modeled as an Entity. If your analysis leads you to that conclusion, refer to Entities (5).
 :::
 
-## Conceptual Whole 概念整体
+### 6.1.3 Conceptual Whole 概念整体
 
 A Value Object may possess just one, a few, or a number of individual attributes, each of which is related to the others. Each attribute contributes an important part to a whole that collectively the attributes describe. Taken apart from the others, each of the attributes fails to provide a cohesive meaning. Only together do all the attributes form the complete intended measure or description. This is different from merely grouping a set of attributes together in an object. The grouping itself accomplishes little if the whole fails to adequately describe another thing in the model.
 
 As Ward Cunningham illustrates in his Whole Value pattern3 [Cunningham, Whole Value aka Value Object], the Value {50,000,000 dollars} has two attributes: the attribute 50,000,000 and the attribute dollars. Separately these attributes describe something else or nothing special. This is especially true of the number 50,000,000, but certainly also of dollars. Together these attributes are a conceptual whole that describes a monetary measure. So we would not expect the thing that is said to be worth 50,000,000 dollars to have two separate attributes to describe its worth, one of amount that is 50,000,000 and one of currency that is dollars. Because the thing’s worth is not just 50,000,000, and not just dollars. Here’s the inexplicit way to model it:
 
 3. Also called Meaningful Whole.
-
-Click here to view code image
 
 ```java
 // incorrectly modeled thing of worth
@@ -123,8 +119,6 @@ public class ThingOfWorth {
 In this example the model and its clients have to know when and how to use amount and currency together because they don’t form a conceptual whole. This begs for a better approach.
 
 To properly describe a thing’s worth it must be treated not as two separate attributes, but as a whole value: {50,000,000 dollars}. Here it is modeled as a Whole Value:
-
-Click here to view code image
 
 ```java
 public final class MonetaryValue implements Serializable {
@@ -142,8 +136,6 @@ This is not to say that MonetaryValue is perfect and could not be improved. For 
 
 Because the wholeness of a concept in the domain is so important, the parent reference to a Value Object is not just an attribute. Rather, it is a property of the containing parent object/thing in the model that holds a reference to it. Granted, the type of the Value Object has one or more attributes (two in the case of MonetaryValue). But to the thing that holds the reference to the Value Object instance, it is a property. Therefore, the thing that is worth 50,000,000 dollars—let’s call it ThingOfWorth—would have a property—possibly named worth—that holds a reference to an instance of a Value Object that has two attributes that collectively describe the measure {50,000,000 dollars}. Remember, though, that the property name—possibly worth—and the Value type name—possibly MonetaryValue—can be determined only after establishing our Bounded Context (2) and its Ubiquitous Language. Here’s an improved implementation:
 
-Click here to view code image
-
 ```java
 // correctly modeled thing of worth
 public class ThingOfWorth {
@@ -156,8 +148,6 @@ public class ThingOfWorth {
 As expected, I changed ThingOfWorth to possess a property of type MonetaryValue that is named worth. It sure cleans up the otherwise disorganized attributes. But more importantly, there is now a Value that expresses a whole.
 
 I want to draw attention to a second change, perhaps one that you were not expecting. The name of the ThingOfWorth may be just as important to aptly describe as is its worth. So I also replaced the String type of name with the ThingName type. The use of a String attribute for name could seem thorough enough at first. But, in later iterations, you learn that the use of a plain String causes problems. It has allowed domain logic central to the name of a ThingOfWorth to leak out of the model. It has leaked into other parts of the model and into client code:
-
-Click here to view code image
 
 ```java
 // clients deal with naming issues
@@ -179,7 +169,7 @@ Challenge Your Assumptions
 If you are tempted to place multiple attributes on an Entity that as a result manifests a weakened relationship to all other attributes, the attributes should very likely be gathered into a single Value type, or multiple Value types. Each should form a conceptual whole that reflects cohesiveness, appropriately named from your Ubiquitous Language. If even one attribute is associated with a descriptive concept, it is very possible that centralizing all concerns of this concept will improve the power of the model. If one or more of the attributes must change over time, consider Whole Value replacement over maintaining an Entity through a long life cycle.
 :::
 
-## Replaceability 可替换性
+### 6.1.4 Replaceability 可替换性
 
 In your model an immutable Value should be held as a reference by an Entity as long as its constant state describes the currently correct Whole Value. If that is no longer true, the entire Value is completely replaced with a new Value that does represent the currently correct whole.
 
@@ -192,8 +182,6 @@ total = 4;
 ```
 
 This is obvious, but it helps make a point. In this example we have just replaced the total value 3 with the value 4. This is not an oversimplification. It is exactly what replacement does even when a given Value Object type is more complex than an integer. Consider a more complex Value type:
-
-Click here to view code image
 
 ```java
 FullName name = new FullName("Vaughn", "Vernon");
@@ -209,13 +197,11 @@ Challenge Your Assumptions
 If you are leaning toward the creation of an Entity because the attributes of the object must change, challenge your assumptions that it’s the correct model. Would object replacement work instead? Considering the preceding replacement example, you may think that creating a new instance is impractical and lacks expressiveness. Even if the object you are dealing with is complex and changes somewhat frequently, replacement need not be an impractical, or even ugly, proposition. A later example demonstrates Side-Effect-Free Behavior for a simple and expressive way to deal with Whole Value replacement.
 :::
 
-## Value Equality 值对象相等性
+### 6.1.5 Value Equality 值对象相等性
 
 When a Value Object instance is compared to another instance, a test of object equality is employed. Throughout the system there may be many, many Value instances that are equal, and yet not the same objects. Equality is determined by comparing the types of both objects and then their attributes. If both the types and their attributes are equal, the Values are considered equal. Further, if any two or more Value instances are equal, you could assign (using replacement) any one of the equal Value instances to an Entity’s property of that type and the assignment would not change the value of the property.
 
 Here’s an example of class FullName implementing a test for Value equality:
-
-Click here to view code image
 
 ```java
 public boolean equals(Object anObject) {
@@ -241,7 +227,7 @@ Challenge Your Assumptions
 Ask yourself if the concept you are designing must be an Entity identified uniquely from all other objects or if it is sufficiently supported using Value equality. If the concept itself doesn’t require unique identity, model it as a Value Object.
 :::
 
-## Side-Effect-Free Behavior 无副作用行为
+### 6.1.6 Side-Effect-Free Behavior 无副作用行为
 
 A method of an object can be designed as a Side-Effect-Free Function [Evans]. A function is an operation of an object that produces output but without modifying its own state. Since no modification occurs when executing a specific operation, that operation is said to be side-effect free. The methods of an immutable Value Object must all be Side-Effect-Free Functions because they must not violate its immutability quality. You may consider this characteristic as part and parcel with immutability. It is closely tied. However, I prefer to break it out as a distinct characteristic because doing so emphasizes a huge benefit of Value Objects. Otherwise, we might see Values only as attribute containers, overlooking one of the most powerful aspects of the pattern.
 
@@ -255,8 +241,6 @@ Bertrand Meyer described Side-Effect-Free Functions as the Query methods of his 
 
 Here is an example of the FullName type’s use of Side-Effect-Free Behavior to produce a new replacement value of itself:
 
-Click here to view code image
-
 ```java
 FullName name = new FullName("Vaughn", "Vernon");
 
@@ -266,8 +250,6 @@ name = name.withMiddleInitial("L");
 ```
 
 This produces the same outcome as the example discussed under “Replaceability,” but in a more expressive way. This Side-Effect-Free Function is implemented as follows:
-
-Click here to view code image
 
 ```java
 public FullName withMiddleInitial(String aMiddleNameOrInitial) {
@@ -307,8 +289,6 @@ Do you see flaws in this? You have probably concluded that at least some problem
 
 Given this analysis, we haven’t really improved anything here. To change that and make the Value robust, you’d pass only Values as parameters to Value methods. This way you reach the greatest level of Side-Effect-Free Behavior. It is not difficult to accomplish:
 
-Click here to view code image
-
 ```java
 float priority =
         businessPriority.priority(
@@ -335,7 +315,7 @@ Is Everything a Value Object?
 By now you may have begun to think that everything looks like a Value Object. That’s better than thinking that everything looks like an Entity. Where you might use a little caution is when there are truly simple attributes that really don’t need any special treatment. Perhaps those are Booleans or any numeric value that is really self-contained, needing no additional functional support, and is related to no other attributes in the same Entity. On their own the simple attributes are a Meaningful Whole. Still, you could certainly make the “mistake” of unnecessarily wrapping a single attribute in a Value type with no special functionality and be better off than those who never give Value design a nod. If you find that you’ve overdone it a bit, you can always refactor a little.
 :::
 
-## INTEGRATE WITH MINIMALISM 最小化集成
+## 6.2 INTEGRATE WITH MINIMALISM 最小化集成
 
 There are always multiple Bounded Contexts in every DDD initiative, which means we must find appropriate ways to integrate them. Where possible use Value Objects to model concepts in the downstream Context when objects from the upstream Context flow in. By doing so you can integrate with a priority on minimalism, that is, minimizing the number of properties that you assume responsibility for managing in your downstream model. Using immutable Values results in assuming less responsibility.
 
@@ -355,7 +335,7 @@ Moderator, among the Collaborator subclasses shown in Figure 6.2, is modeled as 
 
 Of course, there are times when an object in a downstream Context must be eventually consistent with the partial state of one or more Aggregates in a remote Context. In that case we’d design an Aggregate in the downstream consuming Context, because Entities are used to maintain a thread of continuity of change. But we should strive to avoid this modeling choice where possible. When you can, choose Value Objects to model integrations. This advice is applicable in many cases when consuming remote Standard Types.
 
-## STANDARD TYPES EXPRESSED AS VALUES 用值对象表示标准类型
+## 6.3 STANDARD TYPES EXPRESSED AS VALUES 用值对象表示标准类型
 
 In many systems and applications there is a need for what I call Standard Types. Standard Types are descriptive objects that indicate the types of things. There is the thing (Entity) or description (Value) itself, and there are also the Standard Types to distinguish them from other types of the same thing. I am unaware of an industry standard name for this concept, but I have also heard it called a type code and a lookup. The name type code doesn’t say much. And a lookup is a lookup of what? I prefer the name Standard Types because it is more descriptive. To make this concept clearer, consider a few uses. In some cases these are modeled as Power Types.
 
@@ -374,8 +354,6 @@ We may think of these as Entities because they have a life of their own in a ded
 For the sake of maintenance it is common for Standard Types to natively reside in a separate Context from the models that consume them. There they are Entities and have a persistent life cycle with attributes such as identity, name, and description. There may be other attributes as well, but the ones mentioned are the most common to use in a consuming Context. We often use just one. This is in adherence to the goal to integrate with minimalism.
 
 As a very simple example, consider a Standard Type that models a member of a group for which two types exist. There may be members that are users and members that are themselves groups (nested groups). This Java enum represents one way to support a Standard Type:
-
-Click here to view code image
 
 ```java
 package com.saasovation.identityaccess.domain.model.identity;
@@ -401,8 +379,6 @@ public enum GroupMemberType {
 ```
 
 A GroupMember Value instance is instantiated with a specific Group-MemberType. To demonstrate, when a User or a Group is assigned to a Group, the assigned Aggregate is asked to render a GroupMember corresponding to itself. Here is the toGroupMember() method implementation of class User:
-
-Click here to view code image
 
 ```java
 protected GroupMember toGroupMember() {
@@ -445,7 +421,7 @@ If you decide to use classical Value Objects as Standard Types, you may find it 
 
 4. This would be a good time to model an Aggregate in an upstream Context also as an Aggregate in the downstream Context. They wouldn’t be the same class or necessarily contain all the same attributes, but modeling the downstream concept as an Aggregate would allow for eventual consistency and single point updates.
 
-## TESTING VALUE OBJECTS 测试值对象
+## 6.4 TESTING VALUE OBJECTS 测试值对象
 
 To emphasize test-first, I first present sample tests before I provide the Value Object implementation. These tests drive the domain model’s design by providing examples of how a client will use each object.
 
@@ -467,8 +443,6 @@ The Value Object selected is a good all-around representation taken from the lat
 In this Bounded Context business domain experts speak of the “business priority of backlog items.” To fulfill this part of the Ubiquitous Language we model the concept as a BusinessPriority. It provides calculated output suitable for supporting the business analysis of the value of developing each product backlog item [Wiegers]. The outputs are cost percentage, or the cost of developing a specific backlog item as compared to the cost of developing all others; total value, which is the total value gained by developing a specific backlog item; and value percentage, as in the value of developing a specific backlog item compared to the value of developing any other; and priority, which is the calculated priority the business should consider giving this backlog item when compared against all others.
 
 These tests actually emerged over multiple brief refactoring iterations of stepwise refinements, although they are presented here as a finished set:
-
-Click here to view code image
 
 ```java
 package com.saasovation.agilepm.domain.model.product;
@@ -498,8 +472,6 @@ public class BusinessPriorityTest extends DomainTest {
 
 The class has some fixture helpers. Since the team needed to test the accuracy of various calculations, they coded methods to provide NumberFormat instances for fractional values that had either one or two places to the right of the decimal point. You’ll see next why these are useful:
 
-Click here to view code image
-
 ```java
     public void testCostPercentageCalculation() throws Exception {
         BusinessPriority businessPriority =
@@ -521,8 +493,6 @@ The team came up with a good idea to test for immutability. Each test first crea
 Next, they designed the test to create BusinessPriorityTotals and assigned it to the totals method variable. With totals they were able to use the cost-Percentage() query method and assign the results to cost. They then asserted that the value returned was 2.7, which was the manually calculated correct outcome. Finally, they asserted that the behavior of method costPercentage() was truly side-effect free, which would be the case if businessPriority still had Value equality with businessPriorityCopy. From this test they gained a good idea of how to calculate cost percentages and what their outcome would be like.
 
 Next, they needed to test the priority, the total value, and the value percentage calculations, using the same basic plan of attack:
-
-Click here to view code image
 
 ```java
     public void testPriorityCalculation() throws Exception {
@@ -575,7 +545,7 @@ Nontechnical domain experts—given a bit of help—reading these example-based 
 Importantly, the state of the Value Object was guaranteed immutable for every usage. Clients could produce results from the priority calculations of any number of product backlog items, sort them, compare them, and adjust the BusinessPriorityRatings of each item as needed.
 :::
 
-## IMPLEMENTATION 实现
+## 6.5 IMPLEMENTATION 实现
 
 I like this BusinessPriority example because it demonstrates all of the Value characteristics and more. Besides showing how to design for immutability, conceptual wholeness, replaceability, Value equality, and Side-Effect-Free Behavior, it also demonstrates how you can use a Value type as a Strategy [Gamma et al.] (aka Policy).
 
@@ -583,8 +553,6 @@ I like this BusinessPriority example because it demonstrates all of the Value ch
 ![](./figures/ch6/team_huddle-c2.jpg)
 
 As each test method was developed, the team understood more about how a client would use a BusinessPriority, enabling them to implement it to behave as the tests asserted it should. Here is the basic class definition along with constructors that the team coded:
-
-Click here to view code image
 
 ```java
 public final class BusinessPriority implements Serializable {
@@ -618,8 +586,6 @@ The second constructor is used to copy an existing Value to create a new one, or
 This second constructor, the copy constructor, is important for unit tests. When we test a Value Object, we want to include verification that it is immutable. As demonstrated earlier, when the unit test begins, create the new test Value Object instance and a copy of it using the copy constructor, and assert that the two instances are equal. Next, test the Value instance Side-Effect-Free Behavior. If all test goal assertions pass, the final assertion is that the tested and the copied instances are still equal.
 
 Next, we implement the Strategy/Policy part of the Value type:
-
-Click here to view code image
 
 ```java
 public float costPercentage(BusinessPriorityTotals aTotals) {
@@ -667,8 +633,6 @@ If you reach that conclusion, you should still not design Value Objects with ful
 
 The next set of methods includes the standard object overrides equals(), hashCode(), and toString():
 
-Click here to view code image
-
 ```java
 @Override
 public boolean equals(Object anObject) {
@@ -704,8 +668,6 @@ There is nothing special about toString(). It creates a human-readable represent
 
 There are a few remaining methods to review:
 
-Click here to view code image
-
 ```java
     protected BusinessPriority() {
         super();
@@ -726,7 +688,7 @@ Finally, the class definition ends with the property setter for ratings. One of 
 
 The Assertion for valid parameters is called a guard, because it guards the method from being subjected to obviously invalid data. Guards can and should be used in any method when wrong parameters would cause more serious problems later if correctness were otherwise taken for granted. Here the setter asserts that the parameter aRatings is not null, and if it happens to be, it throws an IllegalArgumentException. True, the setter is logically used only once in the Value’s lifetime. Still, the Assertion is a well-placed guard. You will see the advantages of self-delegation demonstrated elsewhere, too. Specifically, Entities (5) explains the technique thoroughly as part of a discussion of validation.
 
-## PERSISTING VALUE OBJECTS 持久化值对象
+## 6.6 PERSISTING VALUE OBJECTS 持久化值对象
 
 There are a variety of ways to persist Value Object instances to a persistent store. In a general sense it involves serializing the object to some text or binary format and saving it to disk. However, since we are not concerned with persisting individual Value instances on their own, I won’t be focusing on general-purpose persistence. Rather, we are more interested in persisting Values along with the state of the Aggregate instances that contain them. The following approaches assume that a parent Entity ultimately holds references to the Value instances that get persisted. All of the following examples are based on the assumption that an Aggregate is being added to or read from its Repository (12), and its contained Values are persisted and reconstituted behind the scenes along with the Entity—such as the Aggregate Root—that contains them.
 
@@ -734,7 +696,7 @@ Object-relational mapping (ORM, such as Hibernate) persistence is popular and wi
 
 But before we jump into Value ORM persistence examples, there’s a vital modeling commitment that must be well understood and diligently followed. So to start off, let’s tackle what can happen when data modeling (as opposed to domain modeling) has an inappropriate influence on your domain model, and what can be done to reject this wrong and harmful influence.
 
-## Reject Undue Influence of Data Model Leakage 拒绝由数据建模泄露带来的不利影响
+### 6.6.1 Reject Undue Influence of Data Model Leakage 拒绝由数据建模泄露带来的不利影响
 
 Probably most times that a Value Object is persisted to a data store (for example, using an ORM tool along with a relational database) it is stored in a denormalized fashion; that is, its attributes are stored in the same database table row as its parent Entity object. This makes the storage and retrieval of Values clean and optimized and prevents any persistence store leakage into the model. It’s both a pleasure and a relief when Values can be persisted this way.
 
@@ -761,13 +723,11 @@ Of course, there are times when database referential integrity matters (such as 
 
 Whatever technical facets your data model uses, its entities, primary keys, referential integrity, and indexes simply must not drive the way you model domain objects. DDD is not about structuring data in a normalized fashion. It is about modeling the Ubiquitous Language in a consistent Bounded Context. I encourage you to adhere to DDD, not to data structure. As you do so, you should wisely take every possible step to hide all vestiges of data model leakage (which will occur to at least a minimal degree when using an ORM) from your domain model and its clients. This is something I discuss in the next section.
 
-## ORM and Single Value Objects ORM 与单个值对象
+### 6.6.2 ORM and Single Value Objects ORM 与单个值对象
 
 Persisting a single Value Object instance to a database is usually very straightforward. Here my focus is on the use of Hibernate with the MySQL relational database. The basic idea is to store each of the attributes of the Value in separate columns of the row where its parent Entity is stored. Said another way, a single Value Object is denormalized into its parent Entity’s row. There are advantages to employing convention for column naming to clearly identify and standardize the way serialized objects are named. I present a persisted Value Object naming convention here.
 
 When using Hibernate to persist a single instance of a Value Object, use the component mapping element. The component element is employed because it enables the Value to be mapped directly into the parent Entity table row in a denormalized fashion. This is an optimal serialization technique that still enables Values to be included in SQL queries. Here is the section of the Hibernate mapping document that describes the mapping of the Business-Priority Value Object held by its parent Entity, class BacklogItem:
-
-Click here to view code image
 
 ```xml
 <component name="businessPriority" class="com.saasovation.agilepm.domain.model.product.BusinessPriority">
@@ -802,8 +762,6 @@ businessPriority_ratings_benefit
 
 To your mind this sample notation may better express the navigation. I have standardized on all underscores since it leans more toward traditional SQL column names rather than object names. The corresponding MySQL database table definition includes the following columns:
 
-Click here to view code image
-
 ```sql
 CREATE TABLE `tbl_backlog_item` (
     ...
@@ -829,7 +787,7 @@ business_priority_ratings_benefit
 
 Hence, although there is a clear impedance mismatch between objects and relational databases, we have realized one of the more functional and optimal mappings possible.
 
-## ORM and Many Values Serialized into a Single Column 多个值对象序列化到单个列中
+### 6.6.3 ORM and Many Values Serialized into a Single Column 多个值对象序列化到单个列中
 
 There are unique challenges associated with mapping a collection of many Value Objects into a relational database using an ORM. To be clear, by collection I mean a List or Set that is held by an Entity and contains zero, one, or more Value instances. The challenges are not insurmountable, but the object-relational impedance mismatch becomes glaringly obvious here.
 
@@ -841,15 +799,13 @@ One option available with Hibernate object-relational mapping is to serialize th
 
 I don’t provide a Hibernate custom user type here to manage collection serialization to a single column, but the Hibernate community provides plenty of guidance for you to implement your own.
 
-## ORM and Many Values Backed by a Database Entity 使用数据库实体保存多个值对象
+### 6.6.4 ORM and Many Values Backed by a Database Entity 使用数据库实体保存多个值对象
 
 A very straightforward approach to persisting a collection of Value instances using Hibernate (or other ORM) and a relational database is to treat the Value type as an entity in the data model. To reiterate what I asserted in the section “Reject Undue Influence of Data Model Leakage,” this approach must not lead to wrongly modeling a concept as an Entity in the domain model just because it is best represented as a database entity for the sake of persistence. It is the object-relation impedance mismatch that in some cases requires this approach, not a DDD principle. If there were a perfectly matched persistence style available to you, you’d model the concept as a Value type and never give database entity characteristics a second thought. It helps our domain modeling mind to think that way.
 
 To accomplish this we can employ a Layer Supertype [Fowler, P of EAA]. Personally it makes me feel better to tuck away the necessary surrogate identity (primary key). However, since every Object in Java (and other languages) already has an internal unique identity that is used only by the virtual machine, you may feel justified in adding a specialized identity directly to the Value. I think whatever approach we prefer, when working around the object-relational impedance mismatch we need to formulate a convincing justification in our minds for why we make a technical choice. My preferences are addressed next.
 
 Here’s an example of my preferred approach to surrogate keys, which uses two Layer Supertype classes:
-
-Click here to view code image
 
 ```java
 public abstract class IdentifiedDomainObject
@@ -871,8 +827,6 @@ The first Layer Supertype involved is IdentifiedDomainObject. This abstract base
 
 Next, I provide one more Layer Supertype that is specific to Value Objects:
 
-Click here to view code image
-
 ```java
 public abstract class IdentifiedValueObject
         extends IdentifiedDomainObject  {
@@ -885,8 +839,6 @@ public abstract class IdentifiedValueObject
 You may consider class IdentifiedValueObject as merely a marker class, a behaviorless subclass of IdentifiedDomainObject. I see it as having a source code documentation benefit because it makes the modeling challenge it addresses more explicit. Along those lines, class IdentifiedDomainObject has a second direct abstract subclass named Entity, which is discussed in Entities (5). I like this approach. You may prefer to eliminate these extra classes.
 
 Now that there is a convenient and suitably hidden means to give any Value type a surrogate identity, here’s a sample class that puts it to use:
-
-Click here to view code image
 
 ```java
 public final class GroupMember extends IdentifiedValueObject  {
@@ -909,8 +861,6 @@ public final class GroupMember extends IdentifiedValueObject  {
 ```
 
 Class GroupMember is a Value type that is collected by the Root Entity of the Aggregate class Group. The Root Entity contains any number of Group-Member instances. Now with each GroupMember instance being uniquely identified to the data model using its surrogate primary key, we are free to map its persistence as a database entity while keeping it a Value in the domain model. Here’s the relevant portion of class Group:
-
-Click here to view code image
 
 ```java
 public class Group extends Entity  {
@@ -940,8 +890,6 @@ public class Group extends Entity  {
 
 Class Group will gradually build up any number of GroupMember instances in its Set of groupMembers. Keep in mind that if you will ever perform whole collection replacement, always use the Collection’s clear() method prior to replacement. Doing so ensures that the backing Hibernate Collection implementation will delete obsolete elements from the data store. The following is not an actual Group method, but an example provided to demonstrate how, in general, to avoid orphaned Value elements when performing whole collection replacement:
 
-Click here to view code image
-
 ```java
 public void replaceMembers(Set<GroupMember> aReplacementMembers) {
     this.groupMembers().clear();
@@ -952,8 +900,6 @@ public void replaceMembers(Set<GroupMember> aReplacementMembers) {
 I think this ORM leakage into the model is unobtrusive because it uses a common Collection facility, and besides, the client doesn’t see it. Synchronizing collection contents with the database doesn’t always require careful thought. A single Value data store deletion is automatically covered by the use of Collection’s remove() method, so in that case there’s no ORM leakage at all.
 
 Next, we are interested in the section of Group’s mapping description that maps the collection:
-
-Click here to view code image
 
 ```xml
 <hibernate-mapping>
@@ -969,8 +915,6 @@ Click here to view code image
 ```
 
 The Set of groupMembers is mapped exactly as a database entity. Additionally we see the full GroupMember mapping description:
-
-Click here to view code image
 
 ```xml
 <hibernate-mapping>
@@ -989,8 +933,6 @@ Click here to view code image
 
 Note the `<id>` element that defines the persistence surrogate primary key. And finally, here is the corresponding MySQL tbl_group_member description:
 
-Click here to view code image
-
 ```sql
 CREATE TABLE `tbl_group_member` (
     `id` int(11) NOT NULL auto_increment,
@@ -1008,7 +950,7 @@ CREATE TABLE `tbl_group_member` (
 
 When we look at the GroupMember mapping and database table description, we get the strong impression that we are dealing with an entity. There’s the primary key named id. There’s the separate table that must be joined with tbl_group. There’s the foreign key back to tbl_group. By any other name we are dealing with an entity, but only from the data model perspective. In the domain model GroupMember is clearly a Value Object. Appropriate steps have been taken in the domain model to carefully hide any persistence concerns. I give no clue to clients of the domain model that any persistence leakage has occurred. And what is more, even developers in the model must look hard to detect any notion of persistence leakage.
 
-## ORM and Many Values Backed by a Join Table 使用联合表保存多个值对象
+### 6.6.5 ORM and Many Values Backed by a Join Table 使用联合表保存多个值对象
 
 Hibernate provides a means to persist multivalued collections in a join table without requiring the Value type itself to have any data model entity characteristics. This mapping type simply persists the collection Value elements to a dedicated table with the parent Entity domain object’s database identity as a foreign key. Thus, all collection Value elements can be queried by their parent’s foreign key identity and reconstituted into the model’s Value collection. The strength of this mapping approach is that the Value type doesn’t need to have a hidden surrogate identity in order to achieve a join. To use this Value collection mapping option you employ Hibernate’s `<composite-element>` tag.
 
@@ -1020,13 +962,11 @@ The third downside of using this mapping approach is that the Value type being m
 
 In the end, I find this mapping approach to be limiting enough that it deserves general avoidance. To me it is simply easier to put a well-hidden surrogate identity on the Value type that is collected into a one-to-many association and not worry about any of the `<composite-element>` constraints. You may feel differently, and it certainly can be leveraged to your benefit if all the modeling cards fall into place for you.
 
-## ORM and Enum-as-State Objects ORM 与枚举状态对象
+### 6.6.6 ORM and Enum-as-State Objects ORM 与枚举状态对象
 
 If you find enums an effective modeling choice for Standard Types and/or State objects, you will need the means to persist them. With Hibernate, Java enums require a specialized persistence technique. Unfortunately to date, the Hibernate development community does not support enums as an out-of-the-box property type. Therefore, to persist enums in our model we have to create a Hibernate custom user type.
 
 Recall that each GroupMember has a GroupMemberType:
-
-Click here to view code image
 
 ```java
 public final class GroupMember extends IdentifiedValueObject  {
@@ -1049,8 +989,6 @@ public final class GroupMember extends IdentifiedValueObject  {
 ```
 
 The GroupMemberType enum Standard Types include GROUP and USER. Here again is the definition:
-
-Click here to view code image
 
 ```java
 package com.saasovation.identityaccess.domain.model.identity;
@@ -1081,8 +1019,6 @@ At the time of writing, this wiki article provided a variety of approaches. Ther
 
 Given the selection of one choice from these options, here’s an example of how the enum GroupMemberType is mapped:
 
-Click here to view code image
-
 ```xml
 <hibernate-mapping>
     <class name="com.saasovation.identityaccess.domain.model.↵
@@ -1107,7 +1043,7 @@ The type column is a VARCHAR type with a maximum size of five characters, enough
 
 ![](./figures/ch6/own_it.jpg)
 
-## WRAP-UP 本章小结
+## 6.7 WRAP-UP 本章小结
 
 In this chapter you’ve seen the importance of favoring the use of Value Objects whenever possible, because they are simply easier to develop, test, and maintain.
 
