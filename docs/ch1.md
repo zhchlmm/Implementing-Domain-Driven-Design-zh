@@ -10,6 +10,7 @@ The software development approach called Domain-Driven Design, or DDD, exists to
 
 You may be completely new to DDD, you may have tried it and struggled, or you may have already succeeded with it before. Regardless, you no doubt are reading this book because you want to improve your ability to implement DDD, and you can. The chapter road map helps you target your specific needs.
 
+::: tip
 Road Map to This Chapter
 
 - Discover what DDD can do for your projects and your teams as you grapple with complexity.
@@ -19,12 +20,13 @@ Road Map to This Chapter
 - Learn how to sell DDD to your management, domain experts, and technical team members.
 - Face the challenges of using DDD armed with knowledge of how to succeed.
 - Look in on a team that is learning how to implement DDD.
+  :::
 
 What should you expect from DDD? Not a heavy, dense, ceremonial process that blocks your way to progress. Rather, expect to use the agile development techniques you probably already have come to trust. Beyond agile, anticipate the acquisition of methods that help you gain deep insight into your business domain, with the prospect of producing testable, malleable, organized, carefully crafted, high-quality software models.
 
 DDD gives you both the strategic and tactical modeling tools necessary to design high-quality software that meets core business objectives.
 
-## CAN I DDD?
+## 1.1 CAN I DDD? 我能 DDD 吗？
 
 You can implement DDD if you have
 
@@ -42,27 +44,33 @@ DDD isn’t first and foremost about technology. In its most central principles,
 
 Won’t having years, even a decade or two, of software development experience help? It might. Nevertheless, software development experience doesn’t give you the ability to listen and learn from domain experts, the people who know the most about some high-priority area of the business. You are at a greater advantage if you can engage with those who seldom, if ever, express themselves using technical lingo. You’re going to have to listen and listen carefully. You’re going to have to respect their viewpoint and trust that they know a lot more than you do.
 
+::: tip
 There Are Big Advantages to Engaging with Domain Experts
 
 You are at a greater advantage if you can engage with those who seldom, if ever, express themselves using technical lingo. Just as you are going to learn from them, there is a high probability that they are also going to learn from you.
+:::
 
 What you may like best about DDD is that the domain experts are also going to have to listen to you. You are on the team just as they are. As strange as it may seem, the domain experts don’t know everything about their business, and they are also going to learn more about it. Just as you are going to learn from them, there is a high probability that they are also going to learn from you. Your questions about what they know will most likely also uncover what they don’t know. You’ll be directly involved in helping everyone on the team discover a deeper understanding of the business, even shaping the business.
 
 It’s great when a team learns and grows together. If you give it a chance, DDD makes that possible.
 
+::: tip
 But We Don’t Have Domain Experts
 
 A domain expert is not one by job title. These are the people who know the line of business you are working in really well. They probably have a lot of background in the business domain, and they might be product designers or even your salespeople.
 
 Look past the job title. The people you are looking for know more about what you are working on than anyone else, and for sure way more than you know. Find them. Listen. Learn. Design in code.
+:::
 
 So far we’re off to a pretty reassuring start. Still, I am also not going to tell you that technical ability isn’t important, that somehow you can get by without it. You will have to grasp some advanced software domain modeling concepts. Even so, it doesn’t necessarily mean you are going to be in over your head. If you have abilities somewhere between grasping Head First Design Patterns [Freeman et al.] and grokking the original Design Patterns [Gamma et al.] text, or even more advanced patterns, you stand a really good chance of succeeding with DDD. You can bank on this: I’m going to do everything I can to make that happen by lowering the bar, no matter what your level of experience.
 
+::: tip
 What’s a Domain Model?
 
 It’s a software model of the very specific business domain you are working in. Often it’s implemented as an object model, where those objects have both data and behavior with literal and accurate business meaning.
 
 Creating a unique, carefully crafted domain model at the heart of a core, strategic application or subsystem is essential to practicing DDD. With DDD your domain models will tend to be smallish, very focused. Using DDD, you never try to model the whole business enterprise with a single, large domain model. Phew, that’s good!
+:::
 
 Consider the following perspectives of the people who can benefit from DDD. I know you fit in here somewhere:
 
@@ -98,7 +106,7 @@ That’s where this book comes in. I’ve tried to make the teaching as pleasant
 
 Your question, though, is: “Why should I do DDD?” That’s fair.
 
-## WHY YOU SHOULD DO DDD
+## 1.2 WHY YOU SHOULD DO DDD 为什么我们需要 DDD
 
 Actually, I’ve already given you some pretty good reasons why DDD makes so much practical sense. At the risk of breaking the DRY principle (“Don’t repeat yourself”), I reiterate them here and also add to the earlier reasons. Does anyone hear an echo?
 
@@ -112,7 +120,7 @@ Actually, I’ve already given you some pretty good reasons why DDD makes so muc
 
 Like any good, high-yielding investment, DDD has some up-front cost of time and effort for the team. Considering the typical challenges encountered by every software development effort will reinforce the need to invest in a sound software development approach.
 
-## Delivering Business Value Can Be Elusive
+### 1.2.1 Delivering Business Value Can Be Elusive
 
 Developing software that delivers true business value is not the same thing as developing ordinary business software. Software that delivers true business value aligns with the business strategic initiatives and bears solutions with clearly identifiable competitive advantage—software that is not about technology, but about the business.
 
@@ -124,7 +132,7 @@ A different, yet related problem is when one or more domain experts do not agree
 
 Worse still is when the technical approach to software development actually wrongly changes the way the business functions. While a different scenario, it is well known that enterprise resource planning (ERP) software will often change the overall business operations of an organization to fit the way the ERP functions. The total cost of owning the ERP cannot be fully calculated in terms of license and maintenance fees. The reorganization and disruption to the business can be far more costly than either of those two tangible factors. A similar dynamic is at play as your software development teams interpret what the business needs into what the newly developed software actually does. This can be both costly and disruptive to the business, its customers, and its partners. Furthermore, this technical interpretation is both unnecessary and avoidable with the use of proven software development techniques. The solution is a key investment.
 
-## How DDD Helps
+### 1.2.2 How DDD Helps
 
 DDD is an approach to developing software that focuses on these three primary aspects:
 
@@ -140,13 +148,15 @@ This entire effort unifies domain experts who initially disagree with each other
 
 Using this approach to software development, you and your team can succeed in delivering true business value.
 
-## Grappling with the Complexity of Your Domain
+### 1.2.3 Grappling with the Complexity of Your Domain
 
 We primarily want to use DDD in the areas that are most important to the business. You don’t invest in what can be easily replaced. You invest in the nontrivial, the more complex stuff, the most valuable and important stuff that promises to return the greatest dividends. That’s why we call such a model a Core Domain (2). It is these, and in second priority the significant Supporting Subdomains (2), that deserve and get the biggest investment. Rightly, then, we need to grasp what complex means.
 
+::: tip
 Use DDD to Simplify, Not to Complicate
 
 Use DDD to model a complex domain in the simplest possible way. Never use DDD to make your solution more complex.
+:::
 
 What qualifies as complex will differ from business to business. Different companies have different challenges, different levels of maturity, and different software development capabilities. So rather than determining what is complex, it may be easier to determine what is nontrivial. Thus, your team and management will have to determine if a system you are planning to work on deserves the cost of making a DDD investment.
 
@@ -168,7 +178,7 @@ Once we make a major architectural decision and get several use cases deep in de
 
 If any of these observations resonates with your team, you are making good use of critical thought.
 
-## Anemia and Memory Loss
+### 1.2.4 Anemia and Memory Loss
 
 Anemia can be a serious health ailment with dangerous side effects. When the name Anemic Domain Model [Fowler, Anemic] was first coined, it wasn’t meant to be a complimentary term, as if to say that a domain model that is weak, without the power of inherent behavioral qualities, could possibly be a good thing. Strangely enough, Anemic Domain Models have popped up left and right in our industry. The trouble is that most developers seem to think this is quite normal and would not even acknowledge that a serious condition exists when employed in their systems. It’s a real problem.
 
@@ -204,9 +214,11 @@ So what does all that have to do with Anemic Domain Models? The Java Bean standa
 
 Interestingly, any domain model that was persisted using Hibernate in the early days had to expose public getters and setters for every persistent simple attribute and complex association in every domain object. This meant that even if you wanted to design your POJO (Plain Old Java Object) with a behavior-rich interface, you had to expose your internals publicly so that Hibernate could persist and reconstitute your domain objects. Sure, you could do things to hide the public JavaBean interface, but by and large most developers didn’t bother or even understand why they should have.
 
+::: tip
 Should I Be Concerned about Using Object-Relational Mappers with DDD?
 
 The preceding critique of Hibernate is from a historical perspective. For quite a while now Hibernate has supported the use of hidden getters and setters, and even direct field access. I demonstrate in later chapters how to avoid anemia in your models when using Hibernate and other persistence mechanisms. So, don’t sweat it.
+:::
 
 Most, if not all, of the Web frameworks also function solely on the JavaBean standard. If you want your Java objects to be able to populate your Web pages, the Java objects had better support the JavaBean specification. If you want your HTML forms to populate a Java object when submitted to the server side, your Java form object had better support the JavaBean specification.
 
@@ -249,9 +261,11 @@ public void saveCustomer(
 }
 ```
 
+::: tip
 Example Purposely Kept Simple
 
 Admittedly, this example is not from a very interesting domain, but it does help us examine a less-than-ideal design and determine how we can refactor it to a much better one. Let’s be clear that this exercise is not leading us to a cooler way to save data. It’s about crafting a software model that adds value to your business, even though this example may not seem valuable.
+:::
 
 What did this code just do? Actually it’s pretty versatile code. It saves a Customer no matter whether it is new or preexisting. It saves a Customer no matter whether the last name changed or the person moved to a new home. It saves a Customer no matter whether the person got a new home phone number or discontinued home phone service, or whether he or she got a mobile phone for the first time, or both. It even saves a Customer who switched from using Juno to using Gmail instead, or who changed jobs and now has a new work e-mail address. Wow, this is an awesome method!
 
@@ -339,6 +353,7 @@ There are at least three big problems here:
 
 Let’s call this unenviable situation anemia-induced memory loss. It happens all the time on projects that produce this kind of implicit, completely subjective code “design.”
 
+::: tip
 Hold On a Minute!
 
 At this point some of you may be thinking, “Our designs never really leave the whiteboard. We just draw some structure, and once agreement on that is reached, we are set free to implement. Scary.”
@@ -346,21 +361,25 @@ At this point some of you may be thinking, “Our designs never really leave the
 If so, try not to distinguish design from implementation. Remember that when practicing DDD, the design is the code and the code is the design. In other words, whiteboard diagrams aren’t the design, just a way to discuss the challenges of the model.
 
 Stay tuned, as you’ll learn how to take ideas off the whiteboard and make them work for you.
+:::
 
 By now you should be worried about this kind of code and how you can create a better design. The good news is that you can succeed in producing an explicit, carefully crafted design in your code.
 
-## HOW TO DO DDD
+## 1.3 HOW TO DO DDD
 
 Let’s back away from heavy implementation discussions for a moment to consider one of the most empowering features of DDD, the Ubiquitous Language. It’s one of the two primary pillars of DDD’s strengths, the second being the Bounded Context (2), and one cannot properly stand without the other.
 
+::: tip
 Terms in a Context
 
 For now think of a Bounded Context as a conceptual boundary around a whole application or finite system. The reason for this boundary is to highlight that every use of a given domain term, phrase, or sentence—the Ubiquitous Language—inside the boundary has a specific contextual meaning. Any use of the term outside that boundary could, and probably does, mean something different. Chapter 2 explains Bounded Context in depth.
+:::
 
-## Ubiquitous Language
+### 1.3.1 Ubiquitous Language
 
 The Ubiquitous Language is a shared team language. It’s shared by domain experts and developers alike. In fact, it’s shared by everyone on the project team. No matter your role on the team, since you are on the team you use the Ubiquitous Language of the project.
 
+::: tip
 So, You Think You Know What a Ubiquitous Language Is
 
 Obviously it’s the language of the business.
@@ -380,6 +399,7 @@ The Ubiquitous Language is a shared language developed by the team—a team comp
 That’s it. Now you’ve got it!
 
 Naturally, the domain experts have a heavy influence on the Language because they know that part of the business best and may be influenced by industry standards. However, the Language is more centered on how the business itself thinks and operates. Also, many times two or more domain experts disagree on concepts and terms, and they are actually wrong about some because they haven’t thought of every case before. So, as the experts and developers work together to craft a model of the domain, they use discussion with both consensus and compromise to achieve the very best Language for the project. The team never compromises on the quality of the Language, just on the best concepts, terms, and meanings. Initial consensus is not the end, however. The Language grows and changes over time as tiny and large breakthroughs are achieved, much like any other living language.
+:::
 
 This is no gimmick to get developers to be on the same page as domain experts. It’s not just a bunch of business jargon being forced on developers. It’s a real language that is created by the whole team—domain experts, developers, business analysts, everyone involved in producing the system. The Language may start out with terms that are the natural lingo of the domain experts, but it isn’t limited to that because the Language must grow over time. Suffice it to say that when multiple domain experts are involved in creating the Language, they often disagree ever so slightly on the terms and meanings of what they thought were already ubiquitous.
 
@@ -460,15 +480,17 @@ Some further clarification about the reach of a Ubiquitous Language is in order.
 
 When you begin a new project in which you are properly using DDD, identify the isolated Bounded Context that is being developed. This places an explicit boundary around your domain model. Discuss, research, conceptualize, develop, and speak the Ubiquitous Language of the isolated domain model within the explicit Bounded Context. Reject all concepts that are not part of the agreed-upon Ubiquitous Language of your isolated Context.
 
-## THE BUSINESS VALUE OF USING DDD
+## 1.4 THE BUSINESS VALUE OF USING DDD 使用 DDD 的业务价值
 
 If your experience is anything like mine, you know that software developers can no longer pursue technologies and techniques just because they sound cool or intriguing. We must justify everything that we do. I think that has not always been true, but it is a good thing it is true now. I think the best justification for using any technology or technique is to provide value to the business. If we can establish real, tangible business value, why would the business ever refuse to use what we recommend?
 
 The business case is strengthened especially if we can demonstrate that the business values are higher with our recommended approach than with other options.
 
+::: tip
 Isn’t Business Value Most Important?
 
 Sure, and perhaps I should have put this subheading “The Business Value of Using DDD” earlier in the book. But it’s done, now. This subheading could actually be “How You Can Sell DDD to Your Boss.” Until you are mostly convinced that there is a real chance that you can actually implement DDD in your company, this book is just hypothetical. And I don’t want you to read this book as just a theoretical exercise. Read it as a concrete reality for your company. Then you can become more excited about how your company can really benefit. So read on.
+:::
 
 Let’s consider the very realistic business value of employing DDD. Be sure to share this openly with your management, domain experts, and technical team members. The value and benefits are summarized here, then I will elaborate. I start off with the less technical benefits.
 
@@ -481,25 +503,25 @@ Let’s consider the very realistic business value of employing DDD. Be sure to 
 7. Agile, iterative, continuous modeling is used.
 8. New tools, both strategic and tactical, are employed.
 
-## 1. The Organization Gains a Useful Model of Its Domain
+### 1. The Organization Gains a Useful Model of Its Domain
 
 The emphasis of DDD is to invest our efforts in what matters most to the business. We don’t over-model. We focus on the Core Domain. Other models exist to support the Core Domain and are important, too. Yet the supporting models may not be given the priority and effort of the Core Domain.
 
 When our focus is on what distinguishes our business from all others, our mission is well understood and we have the parameters we need to keep on track. We will deliver exactly what is needed to achieve competitive advantage.
 
-## 2. A Refined, Precise Definition and Understanding of the Business Is Developed
+### 2. A Refined, Precise Definition and Understanding of the Business Is Developed
 
 The business may actually come to understand itself and its mission better than before. I have heard others state that the Ubiquitous Language developed for the business’s Core Domain has found its way into marketing materials. Certainly it should be incorporated in vision documents and mission statements.
 
 As the model is refined over time, the business develops a deep understanding that can serve as an analysis tool. Details surface out of the minds of your domain experts as you are challenged by one another and shaped by technical team partners. These details can help your business analyze the value of the current and future direction, both strategic and tactical.
 
-## 3. Domain Experts Contribute to Software Design
+### 3. Domain Experts Contribute to Software Design
 
 There is business value when the organization grows a deeper understanding of the core business. Domain experts don’t always agree on concepts and terminology. Sometimes the differences are fostered by different experiences from outside before joining the organization. Sometimes it happens because of the divergent paths taken by each expert within the same organization. Yet when brought together to a DDD effort, the domain experts gain consensus among themselves. This fortifies the effort and the organization as a whole.
 
 Developers now share a common Language as a unified team along with domain experts. They benefit further from the knowledge transfer from the domain experts they work with. As developers inevitably move on, either to a new Core Domain or out of the organization, training and handoffs are easier. The chances of developing “tribal knowledge,” where only a select few understand the model, are reduced. The experts, remaining developers, and new ones continue to share a common knowledge that is available to anyone in the organization who requires it. This advantage exists because there remains an express goal to adhere to the Language of the domain.
 
-## 4. A Better User Experience Is Gained
+### 4. A Better User Experience Is Gained
 
 Often the end user experience can be tuned to better reflect the model of the domain. Domain-Driven is formally “baked in,” influencing human use of the software.
 
@@ -509,25 +531,25 @@ When the user experience is designed to follow the contours of the underlying ex
 
 We next move into more technically driven benefits to the business.
 
-## 5. Clean Boundaries Are Placed around Pure Models
+### 5. Clean Boundaries Are Placed around Pure Models
 
 The technical team is discouraged from doing what might appeal more to their programming and algorithmic interests by aligning expectations with business advantage. Purity in direction allows for focus on the potency of the solution, with efforts directed to where they matter the most. Achieving this is very closely connected to understanding the Bounded Context of the project.
 
-## 6. Enterprise Architecture Is Better Organized
+### 6. Enterprise Architecture Is Better Organized
 
 When Bounded Contexts are well understood and carefully partitioned, all teams in the enterprise develop an acute understanding of where and why integrations are necessary. The boundaries are explicit, and the relationships between them are as well. The teams that have models that intersect by usage dependency employ Context Maps to establish formal relationships and ways to integrate. This can actually lead to a very thorough understanding of the entire enterprise architecture.
 
-## 7. Agile, Iterative, Continuous Modeling Is Used
+### 7. Agile, Iterative, Continuous Modeling Is Used
 
 The word design can evoke negative thoughts in the minds of business management. However, DDD is not a heavyweight, high-ceremony design and development process. DDD is not about drawing diagrams. It is about carefully refining the mental model of domain experts into a useful model for the business. It is not about creating a real-world model, as in trying to mimic reality.
 
 The team’s efforts follow an agile approach, which is iterative and incremental. Any agile process that the team feels comfortable with can be used successfully in a DDD project. The model that is produced is the working software. It is refined continuously until it is no longer needed by the business.
 
-## 8. New Tools, Both Strategic and Tactical, Are Employed
+### 8. New Tools, Both Strategic and Tactical, Are Employed
 
 A Bounded Context gives the team a modeling boundary in which to create a solution to a specific business problem domain. Inside a single Bounded Context is a Ubiquitous Language formulated by the team. It is spoken among the team and in the software model. Disparate teams, sometimes each responsible for a given Bounded Context, use Context Maps to strategically segregate Bounded Contexts and understand their integrations. Within a single modeling boundary the team may employ any number of useful tactical modeling tools: Aggregates (10), Entities (5), Value Objects (6), Services (7), Domain Events (8), and others.
 
-## THE CHALLENGES OF APPLYING DDD
+## 1.5 THE CHALLENGES OF APPLYING DDD 实施 DDD 所面临的挑战
 
 As you implement DDD, you will encounter challenges. So has everyone else who has succeeded at it. What are the common challenges and how do we justify using DDD as we face them? I will discuss the more common ones:
 
@@ -549,6 +571,7 @@ AJ: “If you can’t rope the big steer, you’re gonna go hungry.”
 
 Getting domain expert involvement may require creativity . . .
 
+::: tip
 How to Involve Domain Experts in Your Project
 
 ![](./figures/ch1/domain_expert.jpg)
@@ -560,6 +583,7 @@ Coffee. Use that Ubiquitous Language:
 Learn to use the Ubiquitous Language of C-Level management: “. . . profits . . . revenues . . . competitive edge . . . market domination.” Seriously.
 
 Hockey tickets.
+:::
 
 Most developers have had to change the way they think in order to properly apply DDD. We developers are technical thinkers. Technical solutions come easy for us. It’s not that thinking technically is bad. It’s just that there are times when thinking less technically is better. If it’s been our habit to practice software development only in technical ways for years, perhaps now would be a good time to consider a new way of thinking. Developing the Ubiquitous Language of your domain is the best place to start.
 
@@ -679,7 +703,7 @@ Whiteboard Time
 - Next, write phrases that should be used by your team when you talk about the project.
 - Discuss them with a real domain expert to see how they could be refined (remember to bring the coffee).
 
-## Justification for Domain Modeling
+### 1.5.1 Justification for Domain Modeling
 
 Tactical modeling is generally more complex than strategic modeling. Thus, if you intend to develop a domain model using the DDD tactical patterns (Aggregates, Services, Value Objects, Events, and so forth), doing so will require more careful thought and greater investment. Since this is so, how does an organization justify tactical domain modeling? What criteria can be used to qualify a given project for the extra investment needed to properly apply DDD from top to bottom?
 
@@ -714,7 +738,7 @@ The type of business domain itself is not automatically the determining factor f
 
 This list is not prioritized for your domain, and you can probably assemble additional criteria. You understand the compelling reasons for using the best and most empowering methods possible to your advantage. You also know your business and technology landscape. In the end it is the business customer, not the object practitioners and technologists, who must be pleased. Choose wisely.
 
-## DDD Is Not Heavy
+### 1.5.2 DDD Is Not Heavy
 
 In no way do I want to imply that properly practicing DDD leads to a heavyweight process with lots of ceremony and all the crufty documentation artifacts that must be supported. That’s not what DDD is about. It is meant to fit well into any agile project framework, such as Scrum, that the team desires to use. Its design tenets lean toward rather rapid test-first refinements of a real software model. If you were in need of developing a new domain object, such as an Entity or a Value Object, the test-first approach works like this:
 
@@ -730,7 +754,7 @@ Later you also add tests that verify the correctness of the new domain object fr
 
 This test-first agile methodology repeats until you have a model that is working according to the tasks outlined for the current iteration. The steps outlined previously are agile and represent what Extreme Programming originally promoted. Using agile does not eliminate any essential DDD patterns and practices. They go together quite well. Of course, you can choose to use full DDD without doing test-first development. You can always develop tests against existing model objects. However, designing from the model client’s perspective adds a very desirable dimension.
 
-## FICTION, WITH BUCKETFULS OF REALITY
+## 1.6 FICTION, WITH BUCKETFULS OF REALITY 虚构的案例，真实的实践
 
 As I contemplated how to best present implementation guidance for contemporary use of DDD, I wanted to provide justification for everything I say should be done. That meant supplying not just the how, but the why. It occurred to me that looking at a few projects as case studies would appropriately illustrate why I made a certain suggestion and demonstrate how proper use of DDD will solve the challenges commonly faced.
 
@@ -746,6 +770,7 @@ As we peer into the projects at various points in time, we’ll see different pr
 
 Now allow me to introduce you to the company and tell you a little bit about its teams and the projects they are working on.
 
+::: tip
 SaaSOvation, Its Products, and Its Use of DDD
 
 ![](./figures/ch1/team_huddle.jpg)
@@ -763,12 +788,13 @@ The CollabOvation product development team is staffed first. There are a few sea
 DDD-Lite is a means of picking and choosing a subset of the DDD tactical patterns, but without giving full attention to discovering, capturing, and enhancing the Ubiquitous Language. As well, this technique generally bypasses the use of Bounded Contexts and Context Mapping. Its focus is much more technical, with a desire to solve technical problems. It can have benefits, but generally not with as high a reward as including strategic modeling along with it. SaaSOvation bought into this. In its case doing so soon led to problems because the team didn’t understand Subdomains and the power and safety of explicit Bounded Contexts.
 
 Things could have been worse. SaaSOvation actually avoided some major pitfalls of using DDD-Lite, just because its two core products formed a natural set of Bounded Contexts. This tended to keep the CollabOvation model and the ProjectOvation model formally segregated. But that was just by chance. It didn’t mean the team understood Bounded Context, which is why the problems they did experience happened in the first place. Well, you either learn or you fail.
+:::
 
 It’s good that we can benefit from examining SaaSOvation’s incomplete use of DDD. The team eventually learned from their mistakes by acquiring a better grasp of strategic design. You will also learn from the adjustments the CollabOvation team made, as the eventual ProjectOvation team benefited from retrospectives of the early conditions of its sister and partner project. See Subdomains (2) and Bounded Contexts (2), as well as Context Maps (3), for the full story.
 
 ![](./figures/ch1/own_it.jpg)
 
-## WRAP-UP
+## 1.7 WRAP-UP 本章小结
 
 Well, that’s a pretty encouraging start with DDD. I think by now you probably have gotten a good feeling that you and your team can actually succeed with an advanced software development technique. I agree.
 
